@@ -10,7 +10,7 @@ function Navigation() {
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img 
             src="/images/logo.png" 
-            alt="Medical Center" 
+            alt="Medical Center image" 
             height="40" 
             className="me-2"
           />
