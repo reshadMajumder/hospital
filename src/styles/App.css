@@ -1,0 +1,253 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #0d6efd;
+  --secondary-color: #2c4964;
+  --accent-color: #1977cc;
+  --text-color: #444444;
+  --light-bg: #f8f9fa;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--text-color);
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6;
+  padding-top: 76px; /* Height of fixed navbar */
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.main-content {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Container Override */
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+
+/* Navigation Styles */
+.navbar {
+  background: #fff;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  width: 100%;
+}
+
+.navbar > .container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.navbar-brand {
+  color: var(--secondary-color);
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.nav-link {
+  color: var(--secondary-color);
+  font-weight: 600;
+  padding: 10px 15px !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--accent-color);
+}
+
+/* Section Styles */
+section {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+              url('/images/hero-bg.jpg') center/cover;
+  padding: 120px 0 80px;
+  width: 100%;
+}
+
+.hero-section h1 {
+  color: var(--secondary-color);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero-section .lead {
+  font-size: clamp(16px, 2vw, 20px);
+  margin-bottom: 30px;
+}
+
+.doctor-search .form-control {
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 25px;
+}
+
+.doctor-search .btn {
+  height: 50px;
+  border-radius: 25px;
+  background-color: var(--accent-color);
+  border: none;
+  font-weight: 600;
+}
+
+/* Stats Section */
+.stats-section {
+  background-color: var(--light-bg);
+  padding: 80px 0;
+  width: 100%;
+}
+
+.stat-item {
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-item h2 {
+  color: var(--accent-color);
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+  padding: 80px 0;
+  width: 100%;
+}
+
+/* Location Section */
+.location-section {
+  padding: 80px 0;
+  background-color: var(--light-bg);
+  width: 100%;
+}
+
+.map-container {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  height: 400px;
+}
+
+/* Footer */
+footer {
+  width: 100%;
+  background-color: var(--secondary-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+  }
+
+  .nav-link {
+    padding: 12px 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 60px 0;
+  }
+
+  .stat-item {
+    margin-bottom: 20px;
+  }
+
+  .map-container {
+    height: 300px;
+    margin-top: 20px;
+  }
+}
+
+/* Utility Classes */
+.shadow-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-hover:hover {
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
