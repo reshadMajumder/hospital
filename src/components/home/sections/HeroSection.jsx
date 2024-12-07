@@ -33,14 +33,15 @@ function HeroSection() {
           </Col>
           <Col lg={6} className="mt-4 mt-lg-0 animate__animated animate__fadeInRight">
             <div className="position-relative">
-              <img 
+              {/* <img 
                 src="/images/hero-doctor.jpg" 
                 alt="Professional Doctor" 
                 className="img-fluid rounded shadow-lg"
-              />
-              <div className="appointment-card bg-white p-4 shadow-lg rounded position-absolute">
+              /> */}
+              <div className="appointment-card bg-white p-3  rounded position-absolute ">
                 <h4 className="text-primary mb-2">Book Appointment</h4>
                 <p className="mb-0">Get instant appointment with our expert doctors</p>
+                <p className="text-primary mt-2 fw-bold">Hotline: 1-800-HEALTH-CARE</p>
               </div>
             </div>
           </Col>
