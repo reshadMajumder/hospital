@@ -2,7 +2,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { FaHospital, FaStethoscope, FaUserMd, FaTooth } from 'react-icons/fa';
 import ServiceSection from '../services/ServiceSection';
 import ServiceHeader from '../services/ServiceHeader';
-import '../../styles/Services.css';
+import '../../styles/services.css';
 
 const Services = () => {
   const hospitalServices = [
