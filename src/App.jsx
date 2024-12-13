@@ -12,6 +12,7 @@ import About from './components/pages/About';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/App.css';
 import BottomNavigation from './components/common/BottomNavigation';
+import DoctorProfile from './components/doctors/DoctorProfile';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
+            <Route path="/Doctor-profile" element={<DoctorProfile />} />
           </Routes>
         </main>
         <BottomNavigation />
