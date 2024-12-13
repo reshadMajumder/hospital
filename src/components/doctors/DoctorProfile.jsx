@@ -1,74 +1,69 @@
-import { Container, Row, Col, Card, Button, Table } from 'react-bootstrap';
-import { FaCalendarAlt, FaPhone, FaEnvelope, FaClock, FaStar } from 'react-icons/fa';
+import React from 'react';
+import { Modal, Row, Col, Badge } from 'react-bootstrap';
+import { motion } from 'framer-motion';
 
-function DoctorProfile({ doctor }) {
+const DoctorProfile = ({ doctor, show, onHide }) => {
+  if (!doctor) return null;
+
   return (
-    <Container className="py-5">
-      <Row>
-        <Col lg={4} className="mb-4">
-          <Card className="border-0 shadow-sm">
-            <Card.Body className="text-center">
-              <img
-                src={doctor.image}
-                alt={doctor.name}
-                className="rounded-circle mb-4"
-                style={{ width: '200px', height: '200px', objectFit: 'cover' }}
-              />
-              <h4>{doctor.name}</h4>
-              <p className="text-primary mb-4">{doctor.specialty}</p>
-              <div className="d-grid gap-2">
-                <Button variant="primary">
-                  <FaCalendarAlt className="me-2" />
-                  Book Appointment
-                </Button>
-                <Button variant="outline-primary">
-                  <FaPhone className="me-2" />
-                  Contact Now
-                </Button>
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-        
-        <Col lg={8}>
-          <Card className="border-0 shadow-sm mb-4">
-            <Card.Body>
-              <h5 className="mb-4">About Doctor</h5>
-              <p>{doctor.description}</p>
-              
-              <Row className="mt-4">
-                <Col md={6}>
-                  <h6 className="text-primary mb-3">Education</h6>
-                  <p>{doctor.education}</p>
-                </Col>
-                <Col md={6}>
-                  <h6 className="text-primary mb-3">Experience</h6>
-                  <p>{doctor.experience}</p>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
+    <Modal 
+      show={show} 
+      onHide={onHide}
+      size="lg"
+      centered
+      className="doctor-profile-modal"
+    >
+      <div className="doctor-profile-header">
+        <h4 className="mb-0">{doctor.name}</h4>
+        <p className="mb-0">{doctor.specialization}</p>
+      </div>
+      
+      <div className="profile-image-container">
+        <motion.img
+          src={doctor.image}
+          alt={doctor.name}
+          className="profile-image"
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        />
+      </div>
 
-          <Card className="border-0 shadow-sm mb-4">
-            <Card.Body>
-              <h5 className="mb-4">Schedule</h5>
-              <Table responsive borderless>
-                <tbody>
-                  <tr>
-                    <td className="text-muted">
-                      <FaClock className="me-2" />
-                      Working Hours
-                    </td>
-                    <td>{doctor.schedule}</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+      <Modal.Body className="pt-4">
+        <Row>
+          <Col md={6}>
+            <h5>Professional Information</h5>
+            <p><strong>Department:</strong> {doctor.department}</p>
+            <p><strong>Experience:</strong> {doctor.experience}</p>
+            <p><strong>Education:</strong> {doctor.education}</p>
+          </Col>
+          <Col md={6}>
+            <h5>Availability</h5>
+            <p><strong>Days:</strong> {doctor.availability.days}</p>
+            <p><strong>Hours:</strong> {doctor.availability.hours}</p>
+            <p><strong>Languages:</strong> {doctor.languages.join(', ')}</p>
+          </Col>
+        </Row>
+
+        <div className="mt-4">
+          <h5>Biography</h5>
+          <p>{doctor.bio}</p>
+        </div>
+
+        <div className="mt-4">
+          <h5>Awards & Recognition</h5>
+          {doctor.awards.map((award, index) => (
+            <Badge 
+              bg="primary" 
+              className="me-2 mb-2" 
+              key={index}
+            >
+              {award}
+            </Badge>
+          ))}
+        </div>
+      </Modal.Body>
+    </Modal>
   );
-}
+};
 
 export default DoctorProfile;

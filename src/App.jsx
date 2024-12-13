@@ -35,7 +35,7 @@ function App() {
         <BottomNavigation />
         <Footer />
       </div>
-    </Router>
+    </Router> 
   );
 }
 

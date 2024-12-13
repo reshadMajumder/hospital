@@ -1,42 +1,39 @@
-import { Card, Button, Badge } from 'react-bootstrap';
-import { FaCalendarAlt, FaPhone } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Card, Button } from 'react-bootstrap';
+import '../../styles/DoctorCard.css';
 
-function DoctorCard({ doctor }) {
+const DoctorCard = ({ doctor, onViewProfile }) => {
   return (
-    <Card className="doctor-card h-100">
-      <div className="doctor-image-wrapper">
-        <Card.Img variant="top" src={doctor.image} alt={doctor.name} />
-        <div className="doctor-overlay">
-          <Button variant="light" className="me-2">
-            <FaPhone /> Call Now
-          </Button>
-          <Button variant="primary">
-            <FaCalendarAlt /> Book
-          </Button>
-        </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="doctor-card"
+    >
+      <div className="doctor-image-container">
+        <img 
+          src={doctor.image} 
+          alt={doctor.name} 
+          className="doctor-image"
+        />
       </div>
-      <Card.Body>
-        <Badge bg="primary" className="mb-2">{doctor.specialty}</Badge>
-        <Card.Title as="h5" className="mb-1">{doctor.name}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted small">
-          {doctor.education}
-        </Card.Subtitle>
-        <Card.Text className="text-muted small mb-3">
-          {doctor.description}
-        </Card.Text>
-        <div className="d-flex justify-content-between align-items-center">
-          <small className="text-primary">
-            <FaCalendarAlt className="me-1" />
-            {doctor.schedule}
-          </small>
-          <Link to={`/doctors/${doctor.id}`} className="btn btn-outline-primary btn-sm">
-            View Profile
-          </Link>
+      <div className="doctor-info">
+        <h3 className="doctor-name">{doctor.name}</h3>
+        <p className="doctor-specialty">{doctor.specialization}</p>
+        <div className="doctor-details">
+          <p><strong>Department:</strong> {doctor.department}</p>
+          <p><strong>Experience:</strong> {doctor.experience}</p>
         </div>
-      </Card.Body>
-    </Card>
+        <Button 
+          className="view-profile-btn"
+          onClick={() => onViewProfile(doctor)}
+        >
+          View Profile
+        </Button>
+      </div>
+    </motion.div>
   );
-}
+};
 
 export default DoctorCard;
