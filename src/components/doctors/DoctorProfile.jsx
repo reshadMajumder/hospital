@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Row, Col, Badge } from 'react-bootstrap';
+import { Modal,Button, Row, Col, Badge } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 
 const DoctorProfile = ({ doctor, show, onHide }) => {
@@ -13,10 +13,21 @@ const DoctorProfile = ({ doctor, show, onHide }) => {
       centered
       className="doctor-profile-modal"
     >
-      <div className="doctor-profile-header">
-        <h4 className="mb-0">{doctor.name}</h4>
-        <p className="mb-0">{doctor.specialization}</p>
+      <div className="doctor-profile-header d-flex justify-content-between align-items-center">
+        <div>
+          <h4 className="mb-0">{doctor.name}</h4>
+          <p className="mb-0">{doctor.specialization}</p>
+        </div>
+        <Button 
+          variant="light" 
+          onClick={onHide}
+          className="close-button"
+        >
+          ×
+        </Button>
+        
       </div>
+      
       
       <div className="profile-image-container">
         <motion.img
@@ -29,6 +40,8 @@ const DoctorProfile = ({ doctor, show, onHide }) => {
       </div>
 
       <Modal.Body className="pt-4">
+        
+      
         <Row>
           <Col md={6}>
             <h5>Professional Information</h5>
