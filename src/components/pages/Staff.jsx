@@ -41,7 +41,7 @@ function Staff() {
   });
 
   return (
-    <Container className="py-5">
+    <Container className="py-5 py-4 mt-5">
       <h2 className="text-center mb-5">Our Staff</h2>
       <Row className="mb-4">
         <Col md={6}>

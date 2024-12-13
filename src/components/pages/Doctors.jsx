@@ -34,7 +34,7 @@ const Doctors = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-center mb-5">Our Expert Doctors</h2>
+        <h2 className="text-center mb-2 py-4 mt-5">Our Expert Doctors</h2>
 
         <div className="search-filter-container">
           <Row>

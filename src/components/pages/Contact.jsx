@@ -9,7 +9,7 @@ function Contact() {
   };
 
   return (
-    <Container className="py-5">
+    <Container className="py-5 py-4 mt-5">
       <h2 className="text-center mb-5">Contact Us</h2>
       
       <Row className="mb-5">

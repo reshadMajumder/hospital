@@ -13,7 +13,7 @@ function Departments() {
 
   return (
     <Container className="py-5">
-      <h2 className="text-center mb-5">Our Departments</h2>
+      <h2 className="text-center mb-5 py-4 mt-5">Our Departments</h2>
       {!selectedDepartment ? (
         <Row>
           {departments.map((department) => (

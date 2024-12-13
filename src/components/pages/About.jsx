@@ -2,10 +2,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 function About() {
   return (
-    <Container className="py-5">
+    <Container className="py-5 py-4 mt-5">
       <Row className="mb-5">
         <Col lg={6}>
-          <h2 className="mb-4">About Medical Center</h2>
+          <h2 className="mb-4 ">About Medical Center</h2>
           <p className="lead mb-4">
             Providing exceptional healthcare services since 1995, Medical Center has been at the forefront of medical excellence and patient care.
           </p>
