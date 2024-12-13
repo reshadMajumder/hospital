@@ -11,11 +11,14 @@ const DoctorCard = ({ doctor, onViewProfile }) => {
       transition={{ duration: 0.5 }}
       className="doctor-card"
     >
+    
       <div className="doctor-image-container">
-        <img 
-          src={doctor.image} 
-          alt={doctor.name} 
-          className="doctor-image"
+      <motion.img
+          src={doctor.image}
+          alt={doctor.name}
+          className="profile-image"
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 300 }}
         />
       </div>
       <div className="doctor-info">
