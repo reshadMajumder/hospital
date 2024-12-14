@@ -8,10 +8,10 @@ function Navigation() {
     <Navbar bg="white" expand="lg" fixed="top" className="py-3">
       <Container>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
-          <img 
-            src="/images/logo.png" 
-            alt="Medical Center image" 
-            height="40" 
+          <img
+            src="/images/logo.png"
+            alt="Medical Center image"
+            height="40"
             className="me-2"
           />
           <span>Medical Center</span>
@@ -19,59 +19,60 @@ function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center">
-            <Nav.Link 
-              as={Link} 
+            <Nav.Link
+              as={Link}
               to="/"
               className={location.pathname === '/' ? 'active' : ''}
             >
               Home
             </Nav.Link>
-            <Nav.Link 
-              as={Link} 
+
+            <Nav.Link
+              as={Link}
               to="/services"
               className={location.pathname === '/services' ? 'active' : ''}
             >
               Services
             </Nav.Link>
-            <Nav.Link 
-              as={Link} 
+            <Nav.Link
+              as={Link}
               to="/doctors"
               className={location.pathname === '/doctors' ? 'active' : ''}
             >
               Doctors
             </Nav.Link>
-            <Nav.Link 
-              as={Link} 
+            <Nav.Link
+              as={Link}
               to="/departments"
               className={location.pathname === '/departments' ? 'active' : ''}
             >
               Departments
             </Nav.Link>
-            <Nav.Link 
-              as={Link} 
+            <Nav.Link
+              as={Link}
               to="/staff"
               className={location.pathname === '/staff' ? 'active' : ''}
             >
               Staff
             </Nav.Link>
-            <Nav.Link 
-              as={Link} 
+            <Nav.Link
+              as={Link}
               to="/reviews"
               className={location.pathname === '/reviews' ? 'active' : ''}
             >
               Reviews
             </Nav.Link>
-            <Nav.Link 
-              as={Link} 
+            <Nav.Link
+              as={Link}
               to="/about"
               className={location.pathname === '/about' ? 'active' : ''}
             >
               About
             </Nav.Link>
-            <Button 
-              as={Link} 
+            <Button
+              as={Link}
               to="/contact"
-              variant="primary" 
+              variant="primary"
               className="ms-lg-3"
             >
               Contact Us
