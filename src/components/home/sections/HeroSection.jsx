@@ -13,53 +13,77 @@ function HeroSection() {
       // Clear previous content
       dnaContainer.innerHTML = '';
 
-      // Create multiple DNA strands
-      const numberOfStrands = 3;
+      // Create fewer strands for better performance
+      const numberOfStrands = 2; // Reduced from 3
+      
+      // Use document fragment for better performance
+      const fragment = document.createDocumentFragment();
       
       for(let s = 0; s < numberOfStrands; s++) {
         const strand = document.createElement('div');
         strand.className = 'dna-strand';
 
-        // Number of base pairs
-        const basePairs = 25;
+        // Reduce number of base pairs
+        const basePairs = 20; // Increased from 15
         
         // Create base pairs and connections
         for (let i = 0; i < basePairs; i++) {
           // Left base
           const leftBase = document.createElement('div');
           leftBase.className = 'dna-base';
-          leftBase.style.left = `${25 + (s * 5)}%`;
-          leftBase.style.top = `${(i * 4)}%`;
-          leftBase.style.transform = `rotate(${i * (360 / basePairs)}deg)`;
+          leftBase.style.cssText = `
+            left: ${25 + (s * 10)}%;
+            top: ${(i * 5)}%;
+            transform: rotate(${i * (360 / basePairs)}deg);
+          `;
           
           // Right base
           const rightBase = document.createElement('div');
           rightBase.className = 'dna-base';
-          rightBase.style.right = `${25 + (s * 5)}%`;
-          rightBase.style.top = `${(i * 4)}%`;
-          rightBase.style.transform = `rotate(${(i * (360 / basePairs)) + 180}deg)`;
+          rightBase.style.cssText = `
+            right: ${25 + (s * 10)}%;
+            top: ${(i * 5)}%;
+            transform: rotate(${(i * (360 / basePairs)) + 180}deg);
+          `;
           
           // Connection
           const connection = document.createElement('div');
           connection.className = 'dna-connection';
-          connection.style.left = '50%';
-          connection.style.top = `${(i * 4)}%`;
-          connection.style.transform = `rotate(${i * (360 / basePairs)}deg)`;
+          connection.style.cssText = `
+            left: 50%;
+            top: ${(i * 5)}%;
+            transform: rotate(${i * (360 / basePairs)}deg);
+          `;
 
           strand.appendChild(leftBase);
           strand.appendChild(rightBase);
           strand.appendChild(connection);
         }
 
-        dnaContainer.appendChild(strand);
+        fragment.appendChild(strand);
       }
+
+      dnaContainer.appendChild(fragment);
     };
 
     createDNAStructure();
 
-    // Recreate DNA structure on window resize
-    window.addEventListener('resize', createDNAStructure);
-    return () => window.removeEventListener('resize', createDNAStructure);
+    // Debounce resize event for better performance
+    let resizeTimeout;
+    const handleResize = () => {
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+      resizeTimeout = setTimeout(createDNAStructure, 150);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+    };
   }, []);
 
   const handleMouseMove = (e) => {
