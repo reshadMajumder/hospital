@@ -58,10 +58,11 @@ function WhyChooseUsSection() {
                       </div>
                     </div>
                     <h3>{reason.title}</h3>
+                    <button className="feature-btn">Learn More</button>
                   </div>
                   <div className="feature-back">
                     <p>{reason.description}</p>
-                    <button className="feature-btn">Learn More</button>
+                    
                   </div>
                 </div>
                 <div className="glow"></div>

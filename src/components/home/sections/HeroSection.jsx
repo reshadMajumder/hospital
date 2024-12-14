@@ -114,7 +114,7 @@ function HeroSection() {
 
   return (
     <section className="hero-section">
-      <div className="dna-animation" ref={dnaRef}></div>
+      {/* <div className="dna-animation" ref={dnaRef}></div> */}
       <Container>
         <Row className="align-items-center">
           <Col lg={6}>
@@ -130,12 +130,11 @@ function HeroSection() {
                   <div className="position-relative">
                     <Form.Control
                       type="text"
-                      placeholder="Search doctors by name or specialty"
+                      placeholder="name or specialty"
                       className="shadow-sm"
                     />
                     <Button variant="primary" className="search-btn">
                       <FaSearch className="me-2" />
-                      Search
                     </Button>
                   </div>
                 </Col>
