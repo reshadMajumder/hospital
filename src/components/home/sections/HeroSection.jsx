@@ -62,6 +62,32 @@ function HeroSection() {
     return () => window.removeEventListener('resize', createDNAStructure);
   }, []);
 
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+
+    card.style.transform = `
+      perspective(1000px)
+      translateY(-50%)
+      rotateX(${rotateX}deg)
+      rotateY(${rotateY}deg)
+      scale3d(1.02, 1.02, 1.02)
+    `;
+  };
+
+  const handleMouseLeave = (e) => {
+    const card = e.currentTarget;
+    card.style.transform = 'translateY(-50%)';
+  };
+
   return (
     <section className="hero-section">
       <div className="dna-animation" ref={dnaRef}></div>
@@ -76,18 +102,18 @@ function HeroSection() {
             </p>
             <Form className="doctor-search animate__animated animate__fadeInUp">
               <Row>
-                <Col md={8} className="mb-3 mb-md-0">
-                  <Form.Control
-                    type="text"
-                    placeholder="Search doctors by name or specialty"
-                    className="shadow-sm"
-                  />
-                </Col>
-                <Col md={4}>
-                  <Button variant="primary" className="w-100 shadow-sm">
-                    <FaSearch className="me-2" />
-                    Search
-                  </Button>
+                <Col>
+                  <div className="position-relative">
+                    <Form.Control
+                      type="text"
+                      placeholder="Search doctors by name or specialty"
+                      className="shadow-sm"
+                    />
+                    <Button variant="primary" className="search-btn">
+                      <FaSearch className="me-2" />
+                      Search
+                    </Button>
+                  </div>
                 </Col>
               </Row>
             </Form>
@@ -106,10 +132,16 @@ function HeroSection() {
                 alt="Professional Doctor" 
                 className="img-fluid rounded shadow-lg"
               /> */}
-              <div className="appointment-card p-3 rounded position-absolute d-none d-lg-block">
-                <h4 className="text-primary mb-2">Book Appointment</h4>
-                <p className="mb-0">Get instant appointment </p>
-                <p className="text-primary mt-2 fw-bold">Hotline: 1-800-HEALTH-CARE</p>
+              <div 
+                className="appointment-card position-absolute d-none d-lg-block"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="card-inner">
+                  <h4 className="text-primary mb-2">Book Appointment</h4>
+                  <p className="mb-0">Get instant appointment </p>
+                  <p className="text-primary mt-2 fw-bold">Hotline: 1-800-HEALTH-CARE</p>
+                </div>
               </div>
             </div>
           </Col>

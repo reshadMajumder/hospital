@@ -90,8 +90,14 @@ body {
 
 /* Navigation Styles */
 .navbar {
-  background: #fff;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 15px 0;
   width: 100%;
 }
@@ -129,42 +135,138 @@ section {
 .hero-section {
   position: relative;
   overflow: hidden;
-  background: 
-  url('https://wallpapercave.com/wp/wp3495108.png') center/cover;
-  padding: 120px 0 80px;
+  background: url('https://wallpapercave.com/wp/wp3495108.png') center/cover;
+  background-attachment: fixed;
+  min-height: calc(100vh - 76px);
   width: 100%;
-  padding-top: 200px;
-  /* padding: 60px 0;
-  background: #f8f9fa; */
+  display: flex;
+  align-items: center;
+  margin-top: 76px;
+  padding: 60px 0;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  z-index: 1;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-section h1 {
   color: var(--secondary-color);
   font-size: clamp(32px, 5vw, 48px);
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 20px;
   line-height: 1.2;
+  text-shadow: 
+    2px 2px 0 #fff,
+    -2px -2px 0 #fff,
+    2px -2px 0 #fff,
+    -2px 2px 0 #fff,
+    4px 4px 8px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.5px;
 }
 
 .hero-section .lead {
   font-size: clamp(16px, 2vw, 20px);
   margin-bottom: 30px;
+  color: var(--secondary-color);
+  font-weight: 600;
+  text-shadow: 
+    1px 1px 0 #fff,
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .doctor-search {
   margin-top: 2rem;
+  background: transparent;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.doctor-search .row {
+  position: relative;
+  margin: 0;
+}
+
+.doctor-search .col-md-8,
+.doctor-search .col-md-4 {
+  padding: 0;
 }
 
 .doctor-search .form-control {
   height: 50px;
-  border-radius: 4px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(25, 119, 204, 0.2);
+  color: var(--secondary-color);
+  font-weight: 500;
+  padding: 0 120px 0 20px; /* Increased right padding to accommodate button */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
 .doctor-search .btn {
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 40px;
+  padding: 0 25px;
+  border-radius: 20px;
+  background: var(--accent-color);
+  border: none;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(25, 119, 204, 0.2);
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .doctor-search {
+    margin: 2rem 0;
+    padding: 15px;
+  }
+
+  .doctor-search .form-control {
+    height: 45px;
+    padding-right: 110px; /* Slightly reduced for mobile */
+  }
+
+  .doctor-search .btn {
+    height: 35px;
+    padding: 0 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 380px) {
+  .doctor-search .form-control {
+    padding-right: 100px;
+  }
+
+  .doctor-search .btn {
+    padding: 0 15px;
+  }
 }
 
 /* Stats Section */
@@ -542,16 +644,53 @@ footer {
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 60px 0;
+    background-attachment: scroll;
+    padding: 40px 0;
+    min-height: calc(100vh - 60px);
+    margin-top: 60px;
   }
 
-  .stat-item {
-    margin-bottom: 20px;
+  .hero-section::before {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
   }
 
-  .map-container {
-    height: 300px;
-    margin-top: 20px;
+  .hero-section h1,
+  .hero-section .lead {
+    width: 100%;
+    text-align: center;
+  }
+
+  .doctor-search {
+    margin: 2rem 10px;
+  }
+
+  .hero-section::before {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+  }
+
+  .hero-section h1 {
+    text-shadow: 
+      1px 1px 0 #fff,
+      -1px -1px 0 #fff,
+      1px -1px 0 #fff,
+      -1px 1px 0 #fff,
+      2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .hero-section .lead {
+    text-shadow: 
+      1px 1px 0 #fff,
+      -1px -1px 0 #fff,
+      1px -1px 0 #fff,
+      -1px 1px 0 #fff;
   }
 }
 
@@ -667,34 +806,71 @@ footer {
     }
   }
 
-/* Appointment Card Styles */
+/* 3D Appointment Card Styles */
 .appointment-card {
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
   max-width: 300px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 25px;
   z-index: 10;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    0 2px 0 rgba(255, 255, 255, 1);
+  animation: float 3s ease-in-out infinite;
 }
 
-/* Mobile styles for appointment card */
+.appointment-card h4 {
+  color: var(--accent-color);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  transform: translateZ(30px);
+}
+
+.appointment-card p {
+  color: var(--secondary-color);
+  margin: 0;
+  transform: translateZ(20px);
+}
+
+.appointment-card .fw-bold {
+  transform: translateZ(25px);
+  color: var(--accent-color);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(-60px);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+/* Mobile styles */
 @media (max-width: 991px) {
   .appointment-card {
     position: static !important;
     transform: none;
     max-width: 100%;
     margin-top: 2rem;
-    right: auto;
-    top: auto;
+    animation: none;
+    padding: 20px;
   }
 
-  .appointment-card h4 {
-    font-size: 1.1rem;
-  }
-
-  .appointment-card p {
-    font-size: 0.9rem;
+  .appointment-card h4,
+  .appointment-card p,
+  .appointment-card .fw-bold {
+    transform: none;
   }
 }
 
@@ -841,4 +1017,21 @@ footer {
 .hero-section .container {
   position: relative;
   z-index: 1;
+}
+
+/* Add a subtle animation to the background */
+@keyframes backgroundZoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.hero-section {
+  animation: backgroundZoom 20s infinite ease-in-out;
 }
