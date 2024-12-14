@@ -1,20 +1,30 @@
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 function Navigation() {
   const location = useLocation();
+  const [expanded, setExpanded] = useState(false);
+
+  const closeNav = () => setExpanded(false);
 
   return (
-    <Navbar bg="white" expand="lg" fixed="top" className="py-3">
+    <Navbar 
+      bg="white" 
+      expand="lg" 
+      fixed="top" 
+      className="py-3"
+      expanded={expanded}
+      onToggle={(expanded) => setExpanded(expanded)}
+    >
       <Container>
-        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
+        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center" onClick={closeNav}>
           <img
             src="/images/logo.png"
             alt="Medical Center image"
             height="40"
             className="me-2"
           />
-          <span>Medical Center</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -23,6 +33,7 @@ function Navigation() {
               as={Link}
               to="/"
               className={location.pathname === '/' ? 'active' : ''}
+              onClick={closeNav}
             >
               Home
             </Nav.Link>
@@ -31,6 +42,7 @@ function Navigation() {
               as={Link}
               to="/services"
               className={location.pathname === '/services' ? 'active' : ''}
+              onClick={closeNav}
             >
               Services
             </Nav.Link>
@@ -38,6 +50,7 @@ function Navigation() {
               as={Link}
               to="/doctors"
               className={location.pathname === '/doctors' ? 'active' : ''}
+              onClick={closeNav}
             >
               Doctors
             </Nav.Link>
@@ -45,6 +58,7 @@ function Navigation() {
               as={Link}
               to="/departments"
               className={location.pathname === '/departments' ? 'active' : ''}
+              onClick={closeNav}
             >
               Departments
             </Nav.Link>
@@ -52,6 +66,7 @@ function Navigation() {
               as={Link}
               to="/staff"
               className={location.pathname === '/staff' ? 'active' : ''}
+              onClick={closeNav}
             >
               Staff
             </Nav.Link>
@@ -59,6 +74,7 @@ function Navigation() {
               as={Link}
               to="/reviews"
               className={location.pathname === '/reviews' ? 'active' : ''}
+              onClick={closeNav}
             >
               Reviews
             </Nav.Link>
@@ -66,6 +82,7 @@ function Navigation() {
               as={Link}
               to="/about"
               className={location.pathname === '/about' ? 'active' : ''}
+              onClick={closeNav}
             >
               About
             </Nav.Link>
@@ -74,6 +91,7 @@ function Navigation() {
               to="/contact"
               variant="primary"
               className="ms-lg-3"
+              onClick={closeNav}
             >
               Contact Us
             </Button>

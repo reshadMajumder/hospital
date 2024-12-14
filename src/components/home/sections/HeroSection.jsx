@@ -119,10 +119,10 @@ function HeroSection() {
         <Row className="align-items-center">
           <Col lg={6}>
             <h1 className="animate__animated animate__fadeInDown">
-              Your Health Is Our Top Priority
+              Your Health - Our Priority
             </h1>
             <p className="lead animate__animated animate__fadeInUp">
-              Providing Quality Healthcare Services with Advanced Medical Technology
+            Let us help you find the care and support you need
             </p>
             <Form className="doctor-search animate__animated animate__fadeInUp">
               <Row>
@@ -150,11 +150,7 @@ function HeroSection() {
           </Col>
           <Col lg={6} className="mt-4 mt-lg-0 animate__animated animate__fadeInRight">
             <div className="position-relative">
-              {/* <img 
-                src="/images/hero-doctor.jpg" 
-                alt="Professional Doctor" 
-                className="img-fluid rounded shadow-lg"
-              /> */}
+              
               <div 
                 className="appointment-card position-absolute d-none d-lg-block"
                 onMouseMove={handleMouseMove}
