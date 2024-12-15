@@ -6,11 +6,11 @@
 }
 
 :root {
-  --primary-color: #eeeeee;
+  --primary-color: #d5ecd5;
   --secondary-color: #771a88;
   --accent-color: #1977cc;
   --text-color: #b81818;
-  --light-bg: #f8faf8;
+  --light-bg: #d5ecd5;
   
   /* Additional theme colors derived from main colors */
   --accent-light: rgba(105, 148, 186, 0.991);

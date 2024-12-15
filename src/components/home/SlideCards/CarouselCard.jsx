@@ -8,10 +8,9 @@ import 'swiper/css/pagination';
 
 function CarouselCard({ title, icon, items }) {
   return (
-    <div className="card-container">
-      <div className="floating-card">
-        <div className="card-header">
-          <FontAwesomeIcon icon={icon} className="card-icon" />
+    <div className="department-card-container">
+      <div className="department-floating-card">
+        <div className="department-card-header">
           <h3>{title}</h3>
         </div>
         <Swiper
@@ -26,7 +25,12 @@ function CarouselCard({ title, icon, items }) {
             disableOnInteraction: false,
           }}
           loop={true}
-          className="mySwiper"
+          slidesPerView={1}
+          centeredSlides={true}
+          loopedSlides={items.length}
+          watchSlidesProgress={true}
+          preventInteractionOnTransition={true}
+          className="department-swiper"
         >
           {items.map((item, index) => (
             <SwiperSlide key={index}>

@@ -3,7 +3,7 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: -50px auto 0;
     padding-top: 100px;
   }
@@ -15,7 +15,6 @@
     flex-wrap: nowrap;
     margin: 0 auto;
     padding: 0 15px;
-    width: 100%;
   }
   
   /* Individual Card Styles */
@@ -31,7 +30,7 @@
     border-radius: 15px;
     padding: 1.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    height: 280px;
+    height: 70px;
     transform-style: preserve-3d;
     transition: transform 0.3s ease;
   }
@@ -58,19 +57,22 @@
   }
   
   /* Swiper Styles */
-  .swiper {
-    width: 100%;
+  .mySwiper {
+    width: 60%;
     height: 160px;
+    position: relative; 
   }
   
   .swiper-slide {
-    background: #fff;
-    border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80% !important; /* Force full width */
+    transition: all 0.3s ease;
   }
   
   .mini-card {
+    width: 90%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -85,6 +87,19 @@
     font-size: 1.1rem;
     color: #333;
     margin: 0;
+  }
+  
+  /* Navigation buttons */
+  .swiper-button-next,
+  .swiper-button-prev {
+    transform: translateY(-50%);
+  }
+  
+  /* Ensure slides stay centered */
+  .swiper-wrapper {
+    display: flex;
+    align-items: center;
+    transition-timing-function: linear !important;
   }
   
   /* Responsive Adjustments */
@@ -136,8 +151,7 @@
         margin-top: 0;
         padding-top: 50px;
     }
-  }
-  
+  }  
   /* Add these styles to your existing SlideCards.css */
   .status-cards-wrapper {
     padding: 2rem 0;
@@ -423,4 +437,116 @@
   
   .modal.fade.show .modal-dialog {
     transform: none;
+  }
+  
+  /* Department Card Styles */
+  .department-card-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 280px;
+    perspective: 1000px;
+  }
+  
+  .department-floating-card {
+    background: var(--accent-light);
+    border-radius: 15px;
+    padding: .2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    height: 230px;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+  }
+  
+  .department-floating-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .department-card-header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .department-icon {
+    font-size: 2rem;
+    color: #0d6efd;
+    margin-bottom: 0.5rem;
+  }
+  
+  .department-card-header h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  /* Department Swiper Styles */
+  .department-swiper {
+    width: 100%;
+    height: 160px;
+    position: relative;
+  }
+  
+  .department-swiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    transition: all 0.3s ease;
+  }
+  
+  .department-mini-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  
+  .department-mini-card h4 {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  /* Navigation buttons */
+  .department-swiper .swiper-button-next,
+  .department-swiper .swiper-button-prev {
+    width: 35px !important;
+    height: 35px !important;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: var(--primary-color) !important;
+    transform: translateY(-50%);
+  }
+  
+  .department-swiper .swiper-button-next:after,
+  .department-swiper .swiper-button-prev:after {
+    font-size: 16px !important;
+    font-weight: bold;
+  }
+  
+  /* Ensure slides stay centered */
+  .department-swiper .swiper-wrapper {
+    display: flex;
+    align-items: center;
+    transition-timing-function: linear !important;
+  }
+  
+  @media (max-width: 768px) {
+    .department-swiper {
+      height: 130px;
+    }
+    
+    .department-mini-card h4 {
+      font-size: 1rem;
+    }
+    
+    .department-swiper .swiper-button-next,
+    .department-swiper .swiper-button-prev {
+      display: none !important;
+    }
   }

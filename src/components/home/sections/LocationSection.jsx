@@ -3,31 +3,35 @@ import GoogleMapComponent from '../../maps/GoogleMapComponent';
 
 function LocationSection() {
   return (
-    <section className="location-section">
+    <section className="location-section py-4">
       <Container>
-        <h2 className="text-center mb-5">Find Us</h2>
-        <Row>
-          <Col md={6} className="mb-4 mb-md-0">
-            <div className="contact-info p-4 bg-white rounded shadow-sm">
-              <h3 className="h4 mb-4">Contact Information</h3>
-              <ul className="list-unstyled">
-                <li className="mb-3">
-                  <strong>Address:</strong> 123 Medical Center Drive, New York, NY 10001
+        <h2 className="text-center mb-4 display-5">Find Us</h2>
+        <Row className="align-items-stretch g-4">
+          <Col lg={6} className="d-flex">
+            <div className="contact-info p-4 bg-white rounded w-100 shadow" style={{minHeight: "300px"}}>
+              <h3 className="h4 mb-4 text-primary">Contact Information</h3>
+              <ul className="list-unstyled contact-list">
+                <li className="mb-3 d-flex align-items-center">
+                  <i className="fas fa-map-marker-alt me-3 text-primary"></i>
+                  <span>123 Medical Center Drive, New York, NY 10001</span>
                 </li>
-                <li className="mb-3">
-                  <strong>Phone:</strong> (555) 123-4567
+                <li className="mb-3 d-flex align-items-center">
+                  <i className="fas fa-phone-alt me-3 text-primary"></i>
+                  <span>(555) 123-4567</span>
                 </li>
-                <li className="mb-3">
-                  <strong>Email:</strong> info@medicalcenter.com
+                <li className="mb-3 d-flex align-items-center">
+                  <i className="fas fa-envelope me-3 text-primary"></i>
+                  <span>info@medicalcenter.com</span>
                 </li>
-                <li>
-                  <strong>Hours:</strong> Mon-Fri: 8:00 AM - 8:00 PM
+                <li className="d-flex align-items-center">
+                  <i className="fas fa-clock me-3 text-primary"></i>
+                  <span>Mon-Fri: 8:00 AM - 8:00 PM</span>
                 </li>
               </ul>
             </div>
           </Col>
-          <Col md={6}>
-            <div className="map-container">
+          <Col lg={6} className="d-flex">
+            <div className="map-container w-100 rounded overflow-hidden shadow" style={{height: "300px"}}>
               <GoogleMapComponent />
             </div>
           </Col>
