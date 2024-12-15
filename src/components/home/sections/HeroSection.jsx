@@ -114,24 +114,23 @@ function HeroSection() {
 
   return (
     <section className="hero-section">
-      {/* <div className="dna-animation" ref={dnaRef}></div> */}
       <Container>
-        <Row className="align-items-center">
-          <Col lg={6}>
-            <h1 className="animate__animated animate__fadeInDown">
+        <Row className="justify-content-center text-center">
+          <Col lg={8} md={10}>
+            <h1 className="animate__animated animate__fadeInDown mb-2">
               Your Health - Our Priority
             </h1>
-            <p className="lead animate__animated animate__fadeInUp">
-            Let us help you find the care and support you need
+            <p className="lead animate__animated animate__fadeInUp mb-3">
+              Let us help you find the care and support you need
             </p>
             <Form className="doctor-search animate__animated animate__fadeInUp">
-              <Row>
-                <Col>
+              <Row className="justify-content-center">
+                <Col lg={8} md={10}>
                   <div className="position-relative">
                     <Form.Control
                       type="text"
-                      placeholder="name or specialty"
-                      className="shadow-sm"
+                      placeholder="Search by doctor name or specialty"
+                      className="shadow-sm search-input"
                     />
                     <Button variant="primary" className="search-btn">
                       <FaSearch className="me-2" />
@@ -140,29 +139,6 @@ function HeroSection() {
                 </Col>
               </Row>
             </Form>
-            <div className="d-block d-lg-none">
-              <div className="appointment-card p-3 rounded">
-                <h4 className="text-primary mb-2">Book Appointment</h4>
-                <p className="mb-0">Get instant appointment </p>
-                <p className="text-primary mt-2 fw-bold">Hotline: 1-800-HEALTH-CARE</p>
-              </div>
-            </div>
-          </Col>
-          <Col lg={6} className="mt-4 mt-lg-0 animate__animated animate__fadeInRight">
-            <div className="position-relative">
-              
-              <div 
-                className="appointment-card position-absolute d-none d-lg-block"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-              >
-                <div className="card-inner">
-                  <h4 className="text-primary mb-2">Book Appointment</h4>
-                  <p className="mb-0">Get instant appointment </p>
-                  <p className="text-primary mt-2 fw-bold">Hotline: 1-800-HEALTH-CARE</p>
-                </div>
-              </div>
-            </div>
           </Col>
         </Row>
       </Container>
