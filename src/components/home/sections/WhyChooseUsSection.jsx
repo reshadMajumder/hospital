@@ -37,8 +37,7 @@ function WhyChooseUsSection() {
       <div className="section-pattern"></div>
       <Container>
         <div className="section-header text-center">
-          <span className="section-subtitle">Why Choose Us</span>
-          <h2 className="section-title">Excellence in Healthcare</h2>
+          <h2 className="section-title">Why Patients Trust Us?</h2>
         </div>
         <Row className="justify-content-center">
           {reasons.map((reason, index) => (

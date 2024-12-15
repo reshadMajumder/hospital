@@ -14,6 +14,8 @@ import './styles/App.css';
 import BottomNavigation from './components/common/BottomNavigation';
 import DoctorProfile from './components/doctors/DoctorProfile';
 import './styles/SlideCards.css';
+import './styles/Sections.css';
+import './styles/Reviews.css';
 function App() {
   return (
     <Router>

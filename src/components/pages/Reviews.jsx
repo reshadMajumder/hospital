@@ -42,49 +42,52 @@ function Reviews() {
   });
 
   return (
-    <div className="reviews-section">
-      <div className="reviews-bg"></div>
-      <Container className="py-5 mt-4">
-        <div className="text-center mb-5">
-          <span className="badge bg-primary-subtle text-primary mb-3 px-3 py-2 rounded-pill">
-            Patient Testimonials
-          </span>
-          <h2 className="display-5 fw-bold mb-3">What Our Patients Say</h2>
-          <p className="text-muted lead w-75 mx-auto">
-            Real experiences shared by our valued patients who trusted us with their care
-          </p>
-        </div>
-        
-        <Row className="mb-5">
-          <Col>
-            <Swiper
-              effect={'coverflow'}
-              grabCursor={true}
-              centeredSlides={true}
-              slidesPerView={'auto'}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
-              coverflowEffect={{
-                rotate: 5,
-                stretch: 0,
-                depth: 100,
-                modifier: 2,
-                slideShadows: false,
-              }}
-              modules={[EffectCoverflow, Navigation, Autoplay]}
-              className="reviews-swiper"
-              navigation
-            >
-              {reviews.map((review) => (
-                <SwiperSlide key={review.id}>
-                  <div className="review-card">
+    <div className="reviews-page">
+      <div className="reviews-hero">
+        <Container>
+          <div className="text-center">
+            <h1 className="hero-title">What Our Patients Say About Us</h1>
+            <p className="hero-subtitle">
+              Real experiences shared by our valued patients who trusted us with their care
+            </p>
+          </div>
+        </Container>
+      </div>
+
+      <div className="reviews-carousel-section">
+        <Container fluid className="p-0">
+          <Swiper
+            effect={'coverflow'}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={'auto'}
+            initialSlide={1}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 200,
+              modifier: 1.5,
+              slideShadows: false,
+            }}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true
+            }}
+            modules={[EffectCoverflow, Navigation, Autoplay]}
+            className="reviews-swiper"
+            navigation
+          >
+            {reviews.map((review) => (
+              <SwiperSlide key={review.id}>
+                <div className="review-card">
+                  <div className="review-card-inner">
                     <div className="review-header">
-                      <div className="avatar-wrapper">
-                        <FaUserCircle className="avatar-icon" />
+                      <div className="avatar-container">
+                        <FaUserCircle className="user-icon" />
                       </div>
-                      <div className="rating mb-2">
+                      <h4>{review.name}</h4>
+                      <div className="rating">
                         {[...Array(5)].map((_, index) => (
                           <FaStar
                             key={index}
@@ -93,86 +96,78 @@ function Reviews() {
                         ))}
                       </div>
                     </div>
-                    <div className="quote-icon">
-                      <FaQuoteRight />
-                    </div>
+                    <FaQuoteRight className="quote-icon" />
                     <p className="review-text">{review.comment}</p>
-                    <div className="reviewer-info">
-                      <h4>{review.name}</h4>
-                      <div className="meta">
-                        <span className="badge bg-primary-subtle text-primary me-2">
-                          {review.role}
-                        </span>
-                        <span className="specialty">{review.specialty}</span>
-                      </div>
+                   
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Container>
+      </div>
+
+      <div className="share-experience-section">
+        <Container>
+          <Row className="justify-content-center">
+            <Col lg={6}>
+              <div className="form-wrapper">
+                <div className="form-header text-center">
+                  <h2>Your Experience Matters</h2>
+                  <p>Help us improve our services by sharing your feedback</p>
+                </div>
+                <Form onSubmit={(e) => e.preventDefault()}>
+                  <Form.Group className="form-floating mb-4">
+                    <Form.Control
+                      type="text"
+                      id="name"
+                      placeholder="Your Name"
+                      className="form-input"
+                    />
+                    <label htmlFor="name">Your Name</label>
+                  </Form.Group>
+
+                  <div className="rating-section text-center mb-4">
+                    <p className="rating-label">Rate your experience</p>
+                    <div className="rating-input">
+                      {[5,4,3,2,1].map(num => (
+                        <button
+                          key={num}
+                          type="button"
+                          className={`rating-btn ${formData.rating >= num ? 'active' : ''}`}
+                          onClick={() => setFormData({...formData, rating: num})}
+                        >
+                          <FaStar />
+                        </button>
+                      ))}
                     </div>
                   </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Col>
-        </Row>
 
-        <Row className="justify-content-center">
-          <Col md={8} lg={6}>
-            <div className="review-form">
-              <div className="form-header text-center mb-4">
-                <h3 className="h4 fw-bold mb-2">Share Your Experience</h3>
-                <p className="text-muted">Your feedback helps us improve our services</p>
-              </div>
-              <Form onSubmit={(e) => e.preventDefault()}>
-                <div className="form-floating mb-4">
-                  <Form.Control
-                    type="text"
-                    id="name"
-                    placeholder="Your Name"
-                    className="form-control-lg border-0 bg-light"
-                  />
-                  <label htmlFor="name">Your Name</label>
-                </div>
+                  <Form.Group className="form-floating mb-4">
+                    <Form.Control
+                      as="textarea"
+                      id="experience"
+                      placeholder="Share your experience"
+                      className="form-input"
+                      style={{ height: '120px' }}
+                    />
+                    <label htmlFor="experience">Share your experience</label>
+                  </Form.Group>
 
-                <div className="rating-section text-center mb-4">
-                  <p className="text-muted mb-3">How would you rate your experience?</p>
-                  <div className="rating-input">
-                    {[5,4,3,2,1].map(num => (
-                      <button
-                        key={num}
-                        type="button"
-                        className={`rating-btn ${formData.rating >= num ? 'active' : ''}`}
-                        onClick={() => setFormData({...formData, rating: num})}
-                      >
-                        <FaStar />
-                      </button>
-                    ))}
+                  <div className="text-center">
+                    <Button 
+                      type="submit"
+                      className="submit-button"
+                    >
+                      Submit Review
+                    </Button>
                   </div>
-                </div>
-
-                <div className="form-floating mb-4">
-                  <Form.Control
-                    as="textarea"
-                    id="comment"
-                    placeholder="Your Experience"
-                    className="form-control-lg border-0 bg-light"
-                    style={{ height: '120px' }}
-                  />
-                  <label htmlFor="comment">Your Experience</label>
-                </div>
-
-                <div className="text-center">
-                  <Button 
-                    variant="primary" 
-                    type="submit" 
-                    size="lg"
-                    className="rounded-pill px-5 py-3 fw-semibold"
-                  >
-                    Submit Review
-                  </Button>
-                </div>
-              </Form>
-            </div>
-          </Col>
-        </Row>
-      </Container>
+                </Form>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 }

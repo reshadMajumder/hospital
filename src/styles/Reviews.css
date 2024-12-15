@@ -1,0 +1,366 @@
+:root {
+  --primary-color: #3182ce;
+  --secondary-color: #2d3748;
+  --background-color: #f7fafc;
+  --text-color: #4a5568;
+  --border-color: #e2e8f0;
+}
+
+.reviews-page {
+  background: var(--background-color);
+}
+
+/* Hero Section */
+.reviews-hero {
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+  padding: 110px 0 0px;
+  position: relative;
+  overflow: hidden;
+}
+
+.reviews-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(49, 130, 206, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(49, 130, 206, 0.03) 0%, transparent 50%);
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: rgba(49, 130, 206, 0.1);
+  color: var(--primary-color);
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--secondary-color);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Reviews Carousel */
+.reviews-carousel-section {
+  padding: 60px 0;
+  margin-top: -60px;
+  position: relative;
+  overflow: visible;
+  background: transparent !important;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.reviews-swiper {
+  padding: 60px 0;
+  overflow: visible !important;
+  position: relative;
+  background: transparent !important;
+  height: 600px;
+}
+
+.swiper-wrapper {
+  background: transparent !important;
+}
+
+.swiper-slide {
+  width: 400px !important;
+  opacity: 0.3;
+  transition: all 0.5s ease;
+  transform: scale(0.85);
+  padding: 20px;
+  background: transparent !important;
+}
+
+.swiper-slide-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.swiper-slide-prev,
+.swiper-slide-next {
+  opacity: 0.7;
+  transform: scale(0.9);
+}
+
+.review-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  /* padding: 2rem; */
+  height: 400px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Navigation buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 50px !important;
+  height: 50px !important;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: var(--primary-color) !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 20px !important;
+  font-weight: bold;
+}
+
+.swiper-button-next {
+  right: calc(50% - 400px) !important;
+}
+
+.swiper-button-prev {
+  left: calc(50% - 400px) !important;
+}
+
+@media (max-width: 1400px) {
+  .swiper-button-next {
+    right: 5% !important;
+  }
+  
+  .swiper-button-prev {
+    left: 5% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .reviews-hero {
+    padding: 60px 0 20px;
+  }
+
+  .reviews-carousel-section {
+    margin-top: -40px;
+    padding: 80px 0;
+  }
+
+  .reviews-swiper {
+    padding: 40px 0;
+    height: 500px;
+  }
+
+  .swiper-slide {
+    width: 300px !important;
+    padding: 10px;
+  }
+
+  .review-card {
+    padding: 1.5rem;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
+}
+
+.avatar-container {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+  background: linear-gradient(135deg, var(--primary-color), #4299e1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-icon {
+  font-size: 40px;
+  color: white;
+}
+
+/* Share Experience Section */
+.share-experience-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.share-experience-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 10% 90%, rgba(49, 130, 206, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 90% 10%, rgba(49, 130, 206, 0.03) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.form-wrapper {
+  background: white;
+  border-radius: 30px;
+  padding: 3.5rem;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.form-header h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.form-header p {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-floating > .form-input {
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  padding: 1.25rem;
+  height: calc(3.8rem + 2px);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f8fafc;
+}
+
+.form-floating > .form-input:focus {
+  border-color: var(--primary-color);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(49, 130, 206, 0.1);
+}
+
+.form-floating > label {
+  padding: 1.25rem;
+  color: #718096;
+}
+
+.rating-section {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 2rem 0;
+}
+
+.rating-label {
+  color: var(--secondary-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.rating-input {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.rating-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #CBD5E0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+}
+
+.rating-btn:hover {
+  transform: scale(1.1);
+}
+
+.rating-btn.active {
+  color: #ECC94B;
+  transform: scale(1.2);
+}
+
+.submit-button {
+  background: linear-gradient(135deg, var(--primary-color), #4299e1);
+  border: none;
+  padding: 1.25rem 3rem;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(49, 130, 206, 0.15);
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(49, 130, 206, 0.25);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .share-experience-section {
+    padding: 60px 0;
+  }
+
+  .form-wrapper {
+    padding: 2rem;
+    border-radius: 20px;
+  }
+
+  .form-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .form-header p {
+    font-size: 1rem;
+  }
+
+  .rating-section {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .rating-btn {
+    font-size: 1.75rem;
+  }
+
+  .submit-button {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+  }
+}

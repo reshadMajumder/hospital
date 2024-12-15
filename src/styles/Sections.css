@@ -1,0 +1,21 @@
+.stats-section {
+  padding: 2rem 0;
+  margin-bottom: -2rem; /* Reduce gap with next section */
+  background: #fff;
+}
+
+.why-choose-us {
+  padding-top: 3rem; /* Reduced from default */
+  position: relative;
+  z-index: 1;
+}
+
+/* Adjust stat items spacing */
+.stat-item {
+  margin-bottom: 1rem;
+}
+
+/* Make sure the sections flow together nicely */
+.stats-section + .why-choose-us {
+  margin-top: 0;
+} 
