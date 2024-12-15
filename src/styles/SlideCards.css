@@ -1,0 +1,139 @@
+/* Floating Cards Container */
+.floating-cards {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1400px;
+    margin: -50px auto 0;
+    padding-top: 100px;
+  }
+  
+  .cards-row {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+    flex-wrap: nowrap;
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
+  }
+  
+  /* Individual Card Styles */
+  .card-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    perspective: 1000px;
+  }
+  
+  .floating-card {
+    background: rgba(151, 219, 175, 0.95);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    height: 280px;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+  }
+  
+  .floating-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .card-header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .card-icon {
+    font-size: 2rem;
+    color: #0d6efd;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-header h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  /* Swiper Styles */
+  .swiper {
+    width: 100%;
+    height: 160px;
+  }
+  
+  .swiper-slide {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mini-card {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  
+  .mini-card h4 {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 1200px) {
+    .cards-row {
+      gap: 20px;
+    }
+    
+    .card-container {
+      min-width: 280px;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .cards-row {
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    
+    .card-container {
+      min-width: calc(50% - 15px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-section {
+      padding-top: 100px;
+    }
+    
+    .cards-row {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .card-container {
+      width: 100%;
+      max-width: 350px;
+    }
+    
+    .floating-card {
+      height: 250px;
+    }
+    
+    .swiper {
+      height: 130px;
+    }
+    
+    .floating-cards {
+        margin-top: 0;
+        padding-top: 50px;
+    }
+  }

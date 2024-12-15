@@ -1,9 +1,37 @@
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { FaSearch } from 'react-icons/fa';
-import { useEffect, useRef } from 'react';
+import { FaSearch, FaCalendarAlt } from 'react-icons/fa';
+import { useEffect, useRef, useState } from 'react';
 
 function HeroSection() {
   const dnaRef = useRef(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [isOpen, setIsOpen] = useState(true);
+
+  useEffect(() => {
+    // Update date every second
+    const timer = setInterval(() => {
+      const now = new Date();
+      setCurrentDate(now);
+      
+      // Check if it's Saturday (6) or outside working hours
+      const isSaturday = now.getDay() === 6;
+      const hour = now.getHours();
+      const isWorkingHours = hour >= 8 && hour < 20;
+      
+      setIsOpen(!isSaturday && isWorkingHours);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatDate = (date) => {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
 
   useEffect(() => {
     const createDNAStructure = () => {
@@ -86,32 +114,6 @@ function HeroSection() {
     };
   }, []);
 
-  const handleMouseMove = (e) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
-
-    card.style.transform = `
-      perspective(1000px)
-      translateY(-50%)
-      rotateX(${rotateX}deg)
-      rotateY(${rotateY}deg)
-      scale3d(1.02, 1.02, 1.02)
-    `;
-  };
-
-  const handleMouseLeave = (e) => {
-    const card = e.currentTarget;
-    card.style.transform = 'translateY(-50%)';
-  };
-
   return (
     <section className="hero-section">
       {/* <div className="dna-animation" ref={dnaRef}></div> */}
@@ -150,16 +152,24 @@ function HeroSection() {
           </Col>
           <Col lg={6} className="mt-4 mt-lg-0 animate__animated animate__fadeInRight">
             <div className="position-relative">
-              
-              <div 
-                className="appointment-card position-absolute d-none d-lg-block"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-              >
+              <div className="appointment-card position-absolute d-none d-lg-block">
                 <div className="card-inner">
                   <h4 className="text-primary mb-2">Book Appointment</h4>
                   <p className="mb-0">Get instant appointment </p>
                   <p className="text-primary mt-2 fw-bold">Hotline: 1-800-HEALTH-CARE</p>
+                </div>
+              </div>
+              
+              <div className="appointment-card position-absolute d-none d-lg-block" style={{ top: 'calc(50% + 180px)' }}>
+                <div className="card-inner">
+                  <div className="d-flex align-items-center mb-2">
+                    <FaCalendarAlt className="text-primary me-2" style={{ fontSize: '1.5rem' }} />
+                    <h4 className="text-primary mb-0">Today's Date</h4>
+                  </div>
+                  <p className="mb-0">{formatDate(currentDate)}</p>
+                  <p className={`mt-2 fw-bold ${isOpen ? 'text-success' : 'text-danger'}`}>
+                    {isOpen ? 'Open Today' : 'Closed Today'}
+                  </p>
                 </div>
               </div>
             </div>

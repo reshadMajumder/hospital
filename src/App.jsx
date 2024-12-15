@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/App.css';
 import BottomNavigation from './components/common/BottomNavigation';
 import DoctorProfile from './components/doctors/DoctorProfile';
-
+import './styles/SlideCards.css';
 function App() {
   return (
     <Router>
