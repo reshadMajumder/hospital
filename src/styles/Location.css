@@ -1,0 +1,30 @@
+.contact-info {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  box-shadow: 
+    0 10px 30px rgba(45, 156, 219, 0.1),
+    0 1px 8px rgba(45, 156, 219, 0.05);
+}
+
+.contact-info h3 {
+  color: var(--primary-color);
+}
+
+.contact-info ul li {
+  color: var(--text-light);
+}
+
+.contact-info ul li strong {
+  color: var(--text-color);
+}
+
+.contact-info i {
+  color: var(--primary-color);
+}
+
+.map-container {
+  border: 1px solid var(--border-color);
+  box-shadow: 
+    0 10px 30px rgba(45, 156, 219, 0.1),
+    0 1px 8px rgba(45, 156, 219, 0.05);
+} 

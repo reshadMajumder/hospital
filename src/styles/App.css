@@ -6,19 +6,23 @@
 }
 
 :root {
-  --primary-color: #d5ecd5;
-  --secondary-color: #771a88;
-  --accent-color: #1977cc;
-  --text-color: #b81818;
-  --light-bg: #d5ecd5;
+  --primary-color: #2D9CDB;
+  --secondary-color: #56CCF2;
+  --accent-color: #6FCF97;
+  --background-color: #F3F4F6;
+  --text-color: #333333;
   
   /* Additional theme colors derived from main colors */
-  --accent-light: rgba(105, 148, 186, 0.991);
-  --accent-hover: #1565b0;
-  --text-light: #666666;
-  --text-muted: #888888;
-  --border-color: rgba(0, 0, 0, 0.1);
-  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --primary-light: rgba(45, 156, 219, 0.1);
+  --primary-hover: #2589c2;
+  --secondary-light: rgba(86, 204, 242, 0.1);
+  --secondary-hover: #41b7e0;
+  --accent-light: rgba(111, 207, 151, 0.1);
+  --accent-hover: #5eb583;
+  --text-light: #4a5568;
+  --text-muted: #718096;
+  --border-color: rgba(51, 51, 51, 0.1);
+  --card-shadow: 0 10px 30px rgba(45, 156, 219, 0.1);
   --white: #ffffff;
 }
 
@@ -34,6 +38,7 @@ body {
   font-family: "Open Sans", sans-serif;
   line-height: 1.6;
   padding-top: 76px; /* Height of fixed navbar */
+  background-color: var(--background-color);
 }
 
 #root {
@@ -104,11 +109,12 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(var(--white), 0.98);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 15px 0;
   width: 100%;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .navbar > .container {
@@ -123,14 +129,14 @@ body {
 }
 
 .nav-link {
-  color: var(--secondary-color);
+  color: var(--text-color);
   font-weight: 600;
   padding: 10px 15px !important;
   transition: color 0.3s ease;
 }
 
 .nav-link:hover, .nav-link.active {
-  color: var(--accent-color);
+  color: var(--primary-color);
 }
 
 /* Section Styles */
@@ -144,7 +150,9 @@ section {
 .hero-section {
   position: relative;
   overflow: hidden;
-  background: url('/images/hero-image.png') center/cover;
+  background: url('/images/hero-bag.png');
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
   min-height: calc(100vh - 76px);
   width: 100%;
@@ -155,18 +163,7 @@ section {
 }
 
 .hero-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.3) 0%,om
-    rgba(255, 255, 255, 0.2) 100%
-  );
-  z-index: 1;
+  display: none;
 }
 
 .hero-section .container {
@@ -175,7 +172,7 @@ section {
 }
 
 .hero-section h1 {
-  color: var(--secondary-color);
+  color: var(--text-color);
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 800;
   margin-bottom: 20px;
@@ -192,7 +189,7 @@ section {
 .hero-section .lead {
   font-size: clamp(16px, 2vw, 20px);
   margin-bottom: 30px;
-  color: var(--secondary-color);
+  color: var(--text-light);
   font-weight: 600;
   text-shadow: 
     1px 1px 0 #fff,
@@ -222,9 +219,9 @@ section {
 .doctor-search .form-control {
   height: 50px;
   border-radius: 25px;
-  background: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(25, 119, 204, 0.2);
-  color: var(--secondary-color);
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
   font-weight: 500;
   padding: 0 120px 0 20px; /* Increased right padding to accommodate button */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -236,10 +233,10 @@ section {
   height: 40px;
   padding: 0 25px;
   border-radius: 20px;
-  background: var(--accent-color);
+  background: var(--primary-color);
   border: none;
   font-weight: 600;
-  color: white;
+  color: var(--white);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(25, 119, 204, 0.2);
   position: absolute;
@@ -1482,29 +1479,31 @@ footer {
 /* Update existing color references */
 body {
   color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 .navbar {
-  background: rgba(var(--white), 0.98);
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .nav-link {
-  color: var(--secondary-color);
+  color: var(--text-color);
 }
 
 .nav-link:hover, 
 .nav-link.active {
-  color: var(--accent-color);
+  color: var(--primary-color);
 }
 
 .btn-primary {
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-hover);
-  border-color: var(--accent-hover);
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
 .text-primary {
