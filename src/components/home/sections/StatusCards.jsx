@@ -63,6 +63,10 @@ function StatusCards() {
               <p className={`mt-2 fw-bold ${isOpen ? 'text-success' : 'text-danger'}`}>
                 {isOpen ? 'Open Today' : 'Closed Today'}
               </p>
+              <p className="mb-0 text-muted">
+                <FaClock className="me-2" />
+                {isOpen ? '8:00 AM - 8:00 PM' : 'Opens next at 8:00 AM'}
+              </p>
             </div>
           </div>
         </div>

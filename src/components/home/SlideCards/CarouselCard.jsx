@@ -1,7 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -12,6 +11,14 @@ function CarouselCard({ title, icon, items }) {
       <div className="department-floating-card">
         <div className="department-card-header">
           <h3>{title}</h3>
+          {icon && (
+            <img 
+              src={`http://127.0.0.1:8000${icon}`} 
+              alt={title} 
+              className="card-icon"
+              style={{ width: '24px', height: '24px', marginLeft: '8px' }}
+            />
+          )}
         </div>
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
@@ -34,7 +41,12 @@ function CarouselCard({ title, icon, items }) {
         >
           {items.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="mini-card">
+              <div 
+                className="mini-card"
+                style={{
+                  backgroundImage: `url(http://127.0.0.1:8000${icon})`,
+                }}
+              >
                 <h4>{item}</h4>
               </div>
             </SwiperSlide>

@@ -1,5 +1,5 @@
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { FaSearch } from 'react-icons/fa';
+import { Container, Row, Col } from 'react-bootstrap';
+import SearchBar from '../../common/SearchBar/SearchBar';
 
 function HeroSection() {
   return (
@@ -11,24 +11,11 @@ function HeroSection() {
               Your Health - Our Priority
             </h1>
             <p className="lead animate__animated animate__fadeInUp mb-4">
-              Let us help you find the care and support you need
+              Find the right doctor for your needs
             </p>
-            <Form className="doctor-search animate__animated animate__fadeInUp">
-              <Row className="justify-content-center">
-                <Col md={8}>
-                  <div className="position-relative">
-                    <Form.Control
-                      type="text"
-                      placeholder="Search by name or specialty"
-                      className="shadow-sm py-3"
-                    />
-                    <Button variant="primary" className="search-btn">
-                      <FaSearch className="me-2" />
-                    </Button>
-                  </div>
-                </Col>
-              </Row>
-            </Form>
+            <div className="animate__animated animate__fadeInUp">
+              <SearchBar />
+            </div>
           </Col>
         </Row>
       </Container>

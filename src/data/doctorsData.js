@@ -1,3 +1,4 @@
+
 export const doctors = [
   {
     id: 1,
@@ -48,3 +49,13 @@ export const doctors = [
     bio: "Dr. Emily Rodriguez is dedicated to providing compassionate care for children and has extensive experience in pediatric medicine."
   }
 ];
+
+
+export const Doctors = async () => {
+  const response = await fetch('http://127.0.0.1:8000/api/doctors');
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  const doctors = await response.json();
+  return doctors;
+};

@@ -1,39 +1,42 @@
+import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules';
 import { FaStar, FaQuoteRight, FaUserCircle } from 'react-icons/fa';
+import axios from 'axios';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 
-const reviews = [
-  {
-    id: 1,
-    name: "John Doe",
-    rating: 5,
-    comment: "Exceptional care and attention to detail. The medical staff's professionalism and dedication made my experience remarkable.",
-    role: "Patient",
-    specialty: "Cardiology Department"
-  },
-  {
-    id: 2,
-    name: "Mary Smith",
-    rating: 5,
-    comment: "State-of-the-art facilities combined with compassionate care. The entire team goes above and beyond expectations.",
-    role: "Regular Patient",
-    specialty: "Orthopedics"
-  },
-  {
-    id: 3,
-    name: "David Wilson",
-    rating: 5,
-    comment: "Outstanding medical expertise and patient care. The staff's commitment to excellence is truly commendable.",
-    role: "New Patient",
-    specialty: "General Medicine"
-  }
-];
-
 function ReviewsSection() {
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/reviews/');
+        const formattedReviews = response.data.map(review => ({
+          id: review.id,
+          name: review.name,
+          rating: review.rating,
+          comment: review.review,
+        }));
+        setReviews(formattedReviews);
+        setLoading(false);
+      } catch (err) {
+        setError('Error fetching reviews');
+        setLoading(false);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
+  if (loading) return <p>Loading reviews...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <section className="home-reviews-section">
       <Container>
@@ -88,7 +91,6 @@ function ReviewsSection() {
                   </div>
                   <FaQuoteRight className="quote-icon" />
                   <p className="review-text">{review.comment}</p>
-             
                 </div>
               </div>
             </SwiperSlide>

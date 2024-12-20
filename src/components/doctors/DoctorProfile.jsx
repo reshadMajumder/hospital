@@ -1,79 +1,90 @@
 import React from 'react';
-import { Modal,Button, Row, Col, Badge } from 'react-bootstrap';
+import { Modal, Row, Col } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 
 const DoctorProfile = ({ doctor, show, onHide }) => {
   if (!doctor) return null;
 
   return (
-    <Modal 
-      show={show} 
+    <Modal
+      show={show}
       onHide={onHide}
       size="lg"
       centered
       className="doctor-profile-modal"
     >
-      <div className="doctor-profile-header d-flex justify-content-between align-items-center">
-        <div>
-          <h4 className="mb-0">{doctor.name}</h4>
-          <p className="mb-0">{doctor.specialization}</p>
-        </div>
-        <Button 
-          variant="light" 
-          onClick={onHide}
-          className="close-button"
-        >
-          ×
-        </Button>
-        
-      </div>
-      
-      
-      <div className="profile-image-container">
-        <motion.img
-          src={doctor.image}
-          alt={doctor.name}
-          className="profile-image"
-          whileHover={{ scale: 1.1 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        />
-      </div>
+      <Modal.Header closeButton className="doctor-profile-header">
+        <Modal.Title>Doctor Profile</Modal.Title>
+      </Modal.Header>
 
-      <Modal.Body className="pt-4">
-        
-      
+      <Modal.Body className="p-4">
+        <div className="profile-image-container">
+          <motion.img
+            src={`http://127.0.0.1:8000${doctor.image}`}
+            alt={doctor.name}
+            className="profile-image"
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5 }}
+          />
+        </div>
+
+        <div className="text-center mb-4">
+          <h3>{doctor.name}</h3>
+          <p className="text-primary mb-2">{doctor.specialty.name}</p>
+          <p className="text-muted">{doctor.department.name}</p>
+        </div>
+
         <Row>
           <Col md={6}>
-            <h5>Professional Information</h5>
-            <p><strong>Department:</strong> {doctor.department}</p>
-            <p><strong>Experience:</strong> {doctor.experience}</p>
-            <p><strong>Education:</strong> {doctor.education}</p>
+            <h5>Education</h5>
+            <ul className="list-unstyled">
+              {doctor.education.map((edu, index) => (
+                <li key={index}>{edu.name}</li>
+              ))}
+            </ul>
           </Col>
           <Col md={6}>
-            <h5>Availability</h5>
-            <p><strong>Days:</strong> {doctor.availability.days}</p>
-            <p><strong>Hours:</strong> {doctor.availability.hours}</p>
-            <p><strong>Languages:</strong> {doctor.languages.join(', ')}</p>
+            <h5>Experience</h5>
+            <p>{doctor.experience} years</p>
           </Col>
         </Row>
 
-        <div className="mt-4">
-          <h5>Biography</h5>
-          <p>{doctor.bio}</p>
-        </div>
+        <Row className="mt-3">
+          <Col md={6}>
+            <h5>Working Days</h5>
+            <p>{doctor.WorkingDays}</p>
+          </Col>
+          <Col md={6}>
+            <h5>Schedule</h5>
+            <p>{doctor.schedule}</p>
+          </Col>
+        </Row>
 
-        <div className="mt-4">
-          <h5>Awards & Recognition</h5>
-          {doctor.awards.map((award, index) => (
-            <Badge 
-              bg="primary" 
-              className="me-2 mb-2" 
-              key={index}
-            >
-              {award}
-            </Badge>
-          ))}
-        </div>
+        <Row className="mt-3">
+          <Col md={12}>
+            <h5>Languages</h5>
+            <p>{doctor.language}</p>
+          </Col>
+        </Row>
+
+        {doctor.description && (
+          <Row className="mt-3">
+            <Col md={12}>
+              <h5>About</h5>
+              <p>{doctor.description}</p>
+            </Col>
+          </Row>
+        )}
+
+        {doctor.recognition && (
+          <Row className="mt-3">
+            <Col md={12}>
+              <h5>Recognition</h5>
+              <p>{doctor.recognition}</p>
+            </Col>
+          </Row>
+        )}
       </Modal.Body>
     </Modal>
   );

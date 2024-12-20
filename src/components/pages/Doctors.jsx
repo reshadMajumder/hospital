@@ -1,24 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import DoctorCard from '../doctors/DoctorCard';
 import DoctorProfile from '../doctors/DoctorProfile';
-import { doctors } from '../../data/doctorsData';
+import axios from 'axios';
 
 const Doctors = () => {
+  const [doctors, setDoctors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
 
-  const departments = ['All', ...new Set(doctors.map(doctor => doctor.department))];
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/doctors/');
+        setDoctors(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Error fetching doctors data');
+        setLoading(false);
+      }
+    };
+
+    fetchDoctors();
+  }, []);
+
+  const departments = ['All', ...new Set(doctors.map(doctor => doctor.department.name))];
 
   const filteredDoctors = doctors.filter(doctor => {
     const matchesSearch = doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doctor.specialization.toLowerCase().includes(searchTerm.toLowerCase());
+                         doctor.specialty.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesDepartment = selectedDepartment === '' || 
                              selectedDepartment === 'All' || 
-                             doctor.department === selectedDepartment;
+                             doctor.department.name === selectedDepartment;
     return matchesSearch && matchesDepartment;
   });
 
@@ -26,6 +44,9 @@ const Doctors = () => {
     setSelectedDoctor(doctor);
     setShowProfile(true);
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <Container className="py-5">

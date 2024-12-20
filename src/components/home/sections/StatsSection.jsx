@@ -1,16 +1,32 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import CountUp from 'react-countup';
+import { useEffect, useState } from 'react';
 
 function StatsSection() {
-  const stats = [
-    { value: 50000, label: 'Patients Treated', suffix: '+' },
-    { value: 100, label: 'Expert Consultants', suffix: '+' },
-    { value: 25, label: 'Years Experience', suffix: '+' },
-    { value: 200, label: 'Dedicated Staff', suffix: '+' }
-  ];
+  const [stats, setStats] = useState([]);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/hospital-stats/');
+        const data = await response.json();
+        const formattedStats = [
+          { value: data.patientsTreated, label: 'Patients Treated', suffix: '+' },
+          { value: data.doctorsCount, label: 'Expert Consultants', suffix: '+' },
+          { value: data.hospitalAge, label: 'Years Experience', suffix: '+' },
+          { value: data.staffsCount, label: 'Dedicated Staff', suffix: '+' }
+        ];
+        setStats(formattedStats);
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   return (
-    <section className="stats-section">
+    <section className="stats-section mb-2">
       <Container>
         <Row>
           {stats.map((stat, index) => (

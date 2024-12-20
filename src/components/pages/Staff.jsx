@@ -1,91 +1,104 @@
-import { useState } from 'react';
-import { Container, Row, Col, Form, Card } from 'react-bootstrap';
-import { departments } from '../../data/departments';
+import { useState, useEffect } from 'react';
+import { Container, Row, Col, Form } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import DoctorCard from '../doctors/DoctorCard';
+import DoctorProfile from '../doctors/DoctorProfile';
+import axios from 'axios';
 
-const staffList = [
-  {
-    id: 1,
-    name: "Jane Wilson",
-    department: "cardiology",
-    role: "Head Nurse",
-    image: "/images/staff/staff-1.jpg",
-    experience: "10+ years"
-  },
-  {
-    id: 2,
-    name: "Robert Brown",
-    department: "neurology",
-    role: "Senior Nurse",
-    image: "/images/staff/staff-2.jpg",
-    experience: "8+ years"
-  },
-  {
-    id: 3,
-    name: "Emily Davis",
-    department: "pediatrics",
-    role: "Nurse Practitioner",
-    image: "/images/staff/staff-3.jpg",
-    experience: "5+ years"
-  }
-];
-
-function Staff() {
+const Staff = () => {
+  const [staff, setStaff] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedDepartment, setSelectedDepartment] = useState('all');
+  const [selectedDepartment, setSelectedDepartment] = useState('');
+  const [selectedStaff, setSelectedStaff] = useState(null);
+  const [showProfile, setShowProfile] = useState(false);
 
-  const filteredStaff = staffList.filter(staff => {
-    const matchesSearch = staff.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         staff.role.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesDepartment = selectedDepartment === 'all' || staff.department === selectedDepartment;
+  useEffect(() => {
+    const fetchStaff = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/staff/');
+        setStaff(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Error fetching staff data');
+        setLoading(false);
+      }
+    };
+
+    fetchStaff();
+  }, []);
+
+  const departments = ['All', ...new Set(staff.map(member => member.department.name))];
+
+  const filteredStaff = staff.filter(member => {
+    const matchesSearch = member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         member.specialty.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesDepartment = selectedDepartment === '' || 
+                             selectedDepartment === 'All' || 
+                             member.department.name === selectedDepartment;
     return matchesSearch && matchesDepartment;
   });
 
+  const handleViewProfile = (member) => {
+    setSelectedStaff(member);
+    setShowProfile(true);
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
-    <Container className="py-5 py-4 mt-5">
-      <h2 className="text-center mb-5">Our Staff</h2>
-      <Row className="mb-4">
-        <Col md={6}>
-          <Form.Control
-            type="text"
-            placeholder="Search staff by name or role"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </Col>
-        <Col md={6}>
-          <Form.Select
-            value={selectedDepartment}
-            onChange={(e) => setSelectedDepartment(e.target.value)}
-          >
-            <option value="all">All Departments</option>
-            {departments.map((department) => (
-              <option key={department.id} value={department.id}>
-                {department.name}
-              </option>
-            ))}
-          </Form.Select>
-        </Col>
-      </Row>
-      <Row>
-        {filteredStaff.map((staff) => (
-          <Col key={staff.id} md={6} lg={4} className="mb-4">
-            <Card className="h-100">
-              <Card.Img variant="top" src={staff.image} alt={staff.name} />
-              <Card.Body>
-                <Card.Title>{staff.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{staff.role}</Card.Subtitle>
-                <Card.Text>
-                  Department: {departments.find(d => d.id === staff.department)?.name}
-                  <br />
-                  Experience: {staff.experience}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+    <Container className="py-5">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-center mb-2 py-4 mt-5">Our Medical Staff</h2>
+
+        <div className="search-filter-container">
+          <Row>
+            <Col md={6} className="mb-3 mb-md-0">
+              <Form.Control
+                type="text"
+                placeholder="Search by name or specialization..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </Col>
+            <Col md={6}>
+              <Form.Select
+                value={selectedDepartment}
+                onChange={(e) => setSelectedDepartment(e.target.value)}
+              >
+                {departments.map((dept, index) => (
+                  <option key={index} value={dept}>{dept}</option>
+                ))}
+              </Form.Select>
+            </Col>
+          </Row>
+        </div>
+
+        <Row>
+          {filteredStaff.map((member) => (
+            <Col key={member.id} lg={4} md={6} className="mb-4">
+              <DoctorCard 
+                doctor={member} 
+                onViewProfile={handleViewProfile}
+              />
+            </Col>
+          ))}
+        </Row>
+
+        <DoctorProfile
+          doctor={selectedStaff}
+          show={showProfile}
+          onHide={() => setShowProfile(false)}
+        />
+      </motion.div>
     </Container>
   );
-}
+};
 
 export default Staff;

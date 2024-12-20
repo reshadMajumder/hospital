@@ -11,10 +11,9 @@ const DoctorCard = ({ doctor, onViewProfile }) => {
       transition={{ duration: 0.5 }}
       className="doctor-card"
     >
-    
       <div className="doctor-image-container">
-      <motion.img
-          src={doctor.image}
+        <motion.img
+          src={`http://127.0.0.1:8000${doctor.image}`}
           alt={doctor.name}
           className="profile-image"
           whileHover={{ scale: 1.1 }}
@@ -23,10 +22,11 @@ const DoctorCard = ({ doctor, onViewProfile }) => {
       </div>
       <div className="doctor-info">
         <h3 className="doctor-name">{doctor.name}</h3>
-        <p className="doctor-specialty">{doctor.specialization}</p>
+        <p className="doctor-specialty">{doctor.specialty.name}</p>
         <div className="doctor-details">
-          <p><strong>Department:</strong> {doctor.department}</p>
-          <p><strong>Experience:</strong> {doctor.experience}</p>
+          <p><strong>Department:</strong> {doctor.department.name}</p>
+          <p><strong>Experience:</strong> {doctor.experience} years</p>
+          <p><strong>Education:</strong> {doctor.education.map(edu => edu.name).join(', ')}</p>
         </div>
         <Button 
           className="view-profile-btn"

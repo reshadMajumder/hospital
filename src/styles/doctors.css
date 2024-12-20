@@ -1,0 +1,18 @@
+.doctors-search-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Add a different background for the doctors page search */
+.doctors-page .search-bar .form-control {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+}
+
+.doctors-page .search-bar .form-control:focus {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 
+    0 4px 15px rgba(59, 130, 246, 0.1),
+    0 2px 6px rgba(59, 130, 246, 0.05);
+} 

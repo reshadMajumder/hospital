@@ -1,22 +1,68 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, InputGroup } from 'react-bootstrap';
-import { departments } from '../../data/departments';
-import { doctorsList } from '../../data/doctors';
 import DoctorCard from '../doctors/DoctorCard';
-import { FaArrowLeft, FaUserMd, FaBed, FaCalendarCheck, FaSearch, FaHeart, FaBrain, FaXRay, FaTooth, FaChild, FaLungs, FaBone, FaEye, FaStethoscope } from 'react-icons/fa';
+import DoctorProfile from '../doctors/DoctorProfile';
+import { FaArrowLeft, FaUserMd, FaBed, FaCalendarCheck, FaSearch } from 'react-icons/fa';
+import axios from 'axios';
 
 function Departments() {
+  const [departments, setDepartments] = useState([]);
+  const [doctors, setDoctors] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [showProfile, setShowProfile] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch both departments and doctors
+        const [departmentsResponse, doctorsResponse] = await Promise.all([
+          axios.get('http://127.0.0.1:8000/api/departments/'),
+          axios.get('http://127.0.0.1:8000/api/doctors/')
+        ]);
+
+        // Add additional info to departments data
+        const departmentsWithInfo = departmentsResponse.data.map(dept => ({
+          ...dept,
+          description: `Specialized ${dept.name} department providing comprehensive care`,
+          doctorsCount: doctorsResponse.data.filter(doc => doc.department.id === dept.id).length,
+          bedsCount: '50+',
+          appointmentsCount: '100+'
+        }));
+
+        setDepartments(departmentsWithInfo);
+        setDoctors(doctorsResponse.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Error fetching data');
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Filter doctors based on selected department
   const departmentDoctors = selectedDepartment
-    ? doctorsList.filter(doctor => doctor.department === selectedDepartment.id)
+    ? doctors.filter(doctor => doctor.department.id === selectedDepartment.id)
     : [];
 
+  // Filter doctors based on search query
   const filteredDoctors = departmentDoctors.filter(doctor => 
     doctor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    doctor.specialty.toLowerCase().includes(searchQuery.toLowerCase())
+    doctor.specialty.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleViewProfile = (doctor) => {
+    setSelectedDoctor(doctor);
+    setShowProfile(true);
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="departments-section">
@@ -31,7 +77,15 @@ function Departments() {
                 >
                   <div className="department-logo">
                     <div className="logo-circle">
-                      {department.icon}
+                      {department.icon ? (
+                        <img 
+                          src={`http://127.0.0.1:8000${department.icon}`}
+                          alt={department.name}
+                          style={{ width: '40px', height: '40px', objectFit: 'contain' }}
+                        />
+                      ) : (
+                        <FaUserMd />
+                      )}
                     </div>
                     <div className="logo-ring"></div>
                   </div>
@@ -40,7 +94,7 @@ function Departments() {
                   <div className="department-stats">
                     <div className="stat-item">
                       <FaUserMd />
-                      <span>{department.doctorsCount || '10+'} Doctors</span>
+                      <span>{department.doctorsCount || '0'} Doctors</span>
                     </div>
                     <div className="stat-item">
                       <FaBed />
@@ -98,7 +152,10 @@ function Departments() {
                 <Row className="g-4">
                   {filteredDoctors.map((doctor) => (
                     <Col key={doctor.id} md={6} lg={4}>
-                      <DoctorCard doctor={doctor} />
+                      <DoctorCard 
+                        doctor={doctor} 
+                        onViewProfile={handleViewProfile} 
+                      />
                     </Col>
                   ))}
                 </Row>
@@ -110,6 +167,12 @@ function Departments() {
             </div>
           </div>
         )}
+
+        <DoctorProfile
+          doctor={selectedDoctor}
+          show={showProfile}
+          onHide={() => setShowProfile(false)}
+        />
       </Container>
     </div>
   );

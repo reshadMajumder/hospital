@@ -1,46 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CarouselCard from './CarouselCard';
-import { services, departments, doctors } from './CardData';
-import { faStethoscope, faBuildingUser, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 function FloatingCards() {
   const navigate = useNavigate();
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const cards = [
-    { 
-      title: 'Our Services', 
-      icon: faStethoscope, 
-      items: services,
-      path: '/services'
-    },
-    { 
-      title: 'Our Departments', 
-      icon: faBuildingUser, 
-      items: departments,
-      path: '/departments'
-    },
-    { 
-      title: 'Our Doctors', 
-      icon: faUserDoctor, 
-      items: doctors,
-      path: '/doctors'
-    }
-  ];
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/card-slider/');
+        setCards(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Error fetching cards data');
+        setLoading(false);
+      }
+    };
+
+    fetchCards();
+  }, []);
 
   const handleCardClick = (path) => {
     navigate(path);
   };
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <div className="floating-cards">
       <div className="cards-row">
-        {cards.map((card, index) => (
-          <div key={index} onClick={() => handleCardClick(card.path)}>
+        {cards.map((card) => (
+          <div key={card.id} onClick={() => handleCardClick(card.path)}>
             <CarouselCard
-              title={card.title}
-              icon={card.icon}
-              items={card.items}
+              title={card.title.replace(/([A-Z])/g, ' $1').trim()}
+              items={card.items.map(item => item.title)}
             />
           </div>
         ))}

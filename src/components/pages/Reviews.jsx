@@ -1,45 +1,67 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules';
 import { FaStar, FaQuoteRight, FaUserCircle } from 'react-icons/fa';
+import axios from 'axios';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 
-const reviews = [
-  {
-    id: 1,
-    name: "John Doe",
-    rating: 5,
-    comment: "Exceptional care and attention to detail. The medical staff's professionalism and dedication made my experience remarkable.",
-    role: "Patient",
-    specialty: "Cardiology Department"
-  },
-  {
-    id: 2,
-    name: "Mary Smith",
-    rating: 5,
-    comment: "State-of-the-art facilities combined with compassionate care. The entire team goes above and beyond expectations.",
-    role: "Regular Patient",
-    specialty: "Orthopedics"
-  },
-  {
-    id: 3,
-    name: "David Wilson",
-    rating: 5,
-    comment: "Outstanding medical expertise and patient care. The staff's commitment to excellence is truly commendable.",
-    role: "New Patient",
-    specialty: "General Medicine"
-  }
-];
-
 function Reviews() {
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     rating: 5,
-    comment: ''
+    review: '',
+    date: new Date().toISOString().split('T')[0],
+    visibility: false
   });
+  const [submitStatus, setSubmitStatus] = useState({ message: '', type: '' });
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/reviews/');
+        setReviews(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Error fetching reviews');
+        setLoading(false);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/reviews/', formData);
+      setSubmitStatus({
+        message: 'Thank you for your review! It will be visible after moderation.',
+        type: 'success'
+      });
+      // Reset form
+      setFormData({
+        name: '',
+        rating: 5,
+        review: '',
+        date: new Date().toISOString().split('T')[0],
+        visibility: false
+      });
+    } catch (err) {
+      setSubmitStatus({
+        message: 'Error submitting review. Please try again.',
+        type: 'error'
+      });
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="reviews-page">
@@ -97,8 +119,8 @@ function Reviews() {
                       </div>
                     </div>
                     <FaQuoteRight className="quote-icon" />
-                    <p className="review-text">{review.comment}</p>
-                   
+                    <p className="review-text">{review.review}</p>
+                    <p className="review-date">{new Date(review.date).toLocaleDateString()}</p>
                   </div>
                 </div>
               </SwiperSlide>
@@ -116,13 +138,21 @@ function Reviews() {
                   <h2>Your Experience Matters</h2>
                   <p>Help us improve our services by sharing your feedback</p>
                 </div>
-                <Form onSubmit={(e) => e.preventDefault()}>
+                {submitStatus.message && (
+                  <div className={`alert alert-${submitStatus.type === 'success' ? 'success' : 'danger'}`}>
+                    {submitStatus.message}
+                  </div>
+                )}
+                <Form onSubmit={handleSubmit}>
                   <Form.Group className="form-floating mb-4">
                     <Form.Control
                       type="text"
                       id="name"
                       placeholder="Your Name"
                       className="form-input"
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      required
                     />
                     <label htmlFor="name">Your Name</label>
                   </Form.Group>
@@ -150,6 +180,9 @@ function Reviews() {
                       placeholder="Share your experience"
                       className="form-input"
                       style={{ height: '120px' }}
+                      value={formData.review}
+                      onChange={(e) => setFormData({...formData, review: e.target.value})}
+                      required
                     />
                     <label htmlFor="experience">Share your experience</label>
                   </Form.Group>
