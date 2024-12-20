@@ -12,7 +12,7 @@ function FloatingCards() {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/card-slider/');
+        const response = await axios.get('https://hospital-api-tau.vercel.app/api/card-slider/');
         setCards(response.data);
         setLoading(false);
       } catch (err) {

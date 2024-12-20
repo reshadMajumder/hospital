@@ -17,7 +17,7 @@ const Staff = () => {
   useEffect(() => {
     const fetchStaff = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/staff/');
+        const response = await axios.get('https://hospital-api-tau.vercel.app/api/staff/');
         setStaff(response.data);
         setLoading(false);
       } catch (err) {

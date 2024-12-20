@@ -20,7 +20,7 @@ const DoctorProfile = ({ doctor, show, onHide }) => {
       <Modal.Body className="p-4">
         <div className="profile-image-container">
           <motion.img
-            src={`http://127.0.0.1:8000${doctor.image}`}
+            src={`https://hospital-api-tau.vercel.app${doctor.image}`}
             alt={doctor.name}
             className="profile-image"
             initial={{ scale: 0.5 }}

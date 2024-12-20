@@ -45,7 +45,7 @@ function SearchBar({ initialValue = '', onSearchChange }) {
 
       setLoading(true);
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/doctors/search/?query=${searchTerm}`);
+        const response = await axios.get(`https://hospital-api-tau.vercel.app/api/doctors/search/?query=${searchTerm}`);
         setSuggestions(response.data);
         setShowSuggestions(true);
       } catch (error) {

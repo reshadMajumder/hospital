@@ -8,7 +8,7 @@ function StatsSection() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/hospital-stats/');
+        const response = await fetch('https://hospital-api-tau.vercel.app/api/hospital-stats/');
         const data = await response.json();
         const formattedStats = [
           { value: data.patientsTreated, label: 'Patients Treated', suffix: '+' },

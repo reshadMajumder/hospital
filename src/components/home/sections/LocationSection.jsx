@@ -9,7 +9,7 @@ function LocationSection() {
   useEffect(() => {
     const fetchContactInfo = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/hospital-info/');
+        const response = await axios.get('https://hospital-api-tau.vercel.app/api/hospital-info/');
         setContactInfo(response.data);
       } catch (error) {
         console.error('Error fetching contact info:', error);

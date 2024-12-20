@@ -24,7 +24,7 @@ function Reviews() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/reviews/');
+        const response = await axios.get('https://hospital-api-tau.vercel.app/api/reviews/');
         setReviews(response.data);
         setLoading(false);
       } catch (err) {
@@ -39,7 +39,7 @@ function Reviews() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/reviews/', formData);
+      const response = await axios.post('https://hospital-api-tau.vercel.app/api/reviews/', formData);
       setSubmitStatus({
         message: 'Thank you for your review! It will be visible after moderation.',
         type: 'success'

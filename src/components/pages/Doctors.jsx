@@ -17,7 +17,7 @@ const Doctors = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/doctors/');
+        const response = await axios.get('https://hospital-api-tau.vercel.app/api/doctors/');
         setDoctors(response.data);
         setLoading(false);
       } catch (err) {

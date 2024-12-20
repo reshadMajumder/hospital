@@ -13,7 +13,7 @@ function CarouselCard({ title, icon, items }) {
           <h3>{title}</h3>
           {icon && (
             <img 
-              src={`http://127.0.0.1:8000${icon}`} 
+              src={`https://hospital-api-tau.vercel.app${icon}`} 
               alt={title} 
               className="card-icon"
               style={{ width: '24px', height: '24px', marginLeft: '8px' }}
@@ -44,7 +44,7 @@ function CarouselCard({ title, icon, items }) {
               <div 
                 className="mini-card"
                 style={{
-                  backgroundImage: `url(http://127.0.0.1:8000${icon})`,
+                  backgroundImage: `url(https://hospital-api-tau.vercel.app${icon})`,
                 }}
               >
                 <h4>{item}</h4>

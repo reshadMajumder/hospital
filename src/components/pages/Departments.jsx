@@ -20,8 +20,8 @@ function Departments() {
       try {
         // Fetch both departments and doctors
         const [departmentsResponse, doctorsResponse] = await Promise.all([
-          axios.get('http://127.0.0.1:8000/api/departments/'),
-          axios.get('http://127.0.0.1:8000/api/doctors/')
+          axios.get('https://hospital-api-tau.vercel.app/api/departments/'),
+          axios.get('https://hospital-api-tau.vercel.app/api/doctors/')
         ]);
 
         // Add additional info to departments data
@@ -79,7 +79,7 @@ function Departments() {
                     <div className="logo-circle">
                       {department.icon ? (
                         <img 
-                          src={`http://127.0.0.1:8000${department.icon}`}
+                          src={`https://hospital-api-tau.vercel.app${department.icon}`}
                           alt={department.name}
                           style={{ width: '40px', height: '40px', objectFit: 'contain' }}
                         />

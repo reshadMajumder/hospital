@@ -13,7 +13,7 @@ const DoctorCard = ({ doctor, onViewProfile }) => {
     >
       <div className="doctor-image-container">
         <motion.img
-          src={`http://127.0.0.1:8000${doctor.image}`}
+          src={`https://hospital-api-tau.vercel.app${doctor.image}`}
           alt={doctor.name}
           className="profile-image"
           whileHover={{ scale: 1.1 }}

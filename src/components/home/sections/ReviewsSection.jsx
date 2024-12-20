@@ -16,7 +16,7 @@ function ReviewsSection() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/reviews/');
+        const response = await axios.get('https://hospital-api-tau.vercel.app/api/reviews/');
         const formattedReviews = response.data.map(review => ({
           id: review.id,
           name: review.name,
