@@ -1,72 +1,66 @@
 .services-page {
-  padding-top: 76px;
-  background-color: #fff;
-}
-
-.service-header {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.service-title {
-  color: #2c3e50;
-  font-size: 2.5rem;
-  font-weight: 600;
+  padding: 40px 0;
 }
 
 .service-section {
-  background: #a3e6e1;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-}
-
-.service-section-title {
-  color: #2c3e50;
-  font-size: 1.75rem;
-  font-weight: 600;
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  height: 100%;
 }
 
 .service-icon {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 
+.service-section-title {
+  font-size: 1.5rem;
+  color: #2d3748;
+  font-weight: 600;
+}
+
 .service-list {
-  margin-top: 1.5rem;
+  margin-top: 20px;
 }
 
 .service-item {
   display: flex;
-  align-items: start;
-  margin-bottom: 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #f0f0f0;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
-.service-item:last-child {
-  border-bottom: none;
+.service-item:hover {
+  background: rgba(59, 130, 246, 0.05);
 }
 
 .check-icon {
-  color: #28a745;
+  color: #3b82f6;
   font-weight: bold;
-  margin-right: 1rem;
   font-size: 1.1rem;
 }
 
 .service-text {
-  color: #495057;
+  color: #4a5568;
   line-height: 1.5;
 }
 
 @media (max-width: 768px) {
-  .service-title {
-    font-size: 2rem;
-  }
-  
   .service-section {
-    padding: 1.5rem;
+    padding: 20px;
+  }
+
+  .service-section-title {
+    font-size: 1.3rem;
+  }
+
+  .service-item {
+    padding: 6px;
   }
 }

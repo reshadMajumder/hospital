@@ -1815,3 +1815,25 @@ body {
   }
 }
 
+.contact-btn {
+  border-radius: 25px !important;
+  padding: 6px 18px !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+  border: 1.5px solid var(--primary-color) !important;
+  background-color: transparent !important;
+  color: var(--primary-color) !important;
+}
+
+.contact-btn:hover {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(152, 45, 219, 0.12);
+}
+
+.contact-btn:active {
+  transform: translateY(0);
+}
+

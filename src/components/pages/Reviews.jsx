@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import API_URL from '../../data/ApiData';
+import Spinner3D from '../common/Spinner3D'; // Import the spinner component
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -27,10 +28,10 @@ function Reviews() {
       try {
         const response = await axios.get(`${API_URL}/api/reviews/`);
         setReviews(response.data);
-        setLoading(false);
       } catch (err) {
         setError('Error fetching reviews');
-        setLoading(false);
+      } finally {
+        setLoading(false); // Ensure loading is set to false after fetching
       }
     };
 
@@ -61,7 +62,7 @@ function Reviews() {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Spinner3D />; // Show spinner while loading
   if (error) return <div>{error}</div>;
 
   return (

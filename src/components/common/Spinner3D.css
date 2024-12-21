@@ -1,0 +1,50 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 76px);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.spinner3d {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  perspective: 100px;
+}
+
+.cube1, .cube2 {
+  background-color: var(--primary-color);
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: cube 1.8s infinite ease-in-out;
+  border-radius: 2px;
+}
+
+.cube2 {
+  animation-delay: -0.9s;
+}
+
+@keyframes cube {
+  25% { 
+    transform: translateX(42px) rotate(-90deg) scale(0.5);
+    background-color: var(--secondary-color);
+  } 
+  50% { 
+    transform: translateX(42px) translateY(42px) rotate(-179deg);
+    background-color: var(--accent-color);
+  } 
+  50.1% { 
+    transform: translateX(42px) translateY(42px) rotate(-180deg);
+  } 
+  75% { 
+    transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+    background-color: var(--secondary-color);
+  } 
+  100% { 
+    transform: rotate(-360deg);
+  }
+} 

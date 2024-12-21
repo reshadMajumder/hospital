@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import API_URL from '../../../data/ApiData';
+import Spinner3D from '../../common/Spinner3D';
 
 function ReviewsSection() {
   const [reviews, setReviews] = useState([]);

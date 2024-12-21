@@ -89,9 +89,26 @@ function Navigation() {
             <Button
               as={Link}
               to="/contact"
-              variant="primary"
-              className="ms-lg-3"
+              variant="outline-primary"
+              className="ms-lg-3 contact-btn"
               onClick={closeNav}
+              style={{
+                borderRadius: '50px',
+                padding: '8px 24px',
+                fontWeight: '500',
+                transition: 'all 0.3s ease',
+                border: '2px solid var(--primary-color)',
+                backgroundColor: 'transparent',
+                color: 'var(--primary-color)'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'var(--primary-color)';
+                e.target.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = 'var(--primary-color)';
+              }}
             >
               Contact Us
             </Button>

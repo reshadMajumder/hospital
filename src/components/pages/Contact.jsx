@@ -1,12 +1,81 @@
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import axios from 'axios';
+import API_URL from '../../data/ApiData';
+import Spinner3D from '../common/Spinner3D';
 
 function Contact() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  const [status, setStatus] = useState({
+    message: '',
+    type: ''
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [hospitalInfo, setHospitalInfo] = useState(null);
+  const [infoLoading, setInfoLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchHospitalInfo = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/hospital-info/`);
+        setHospitalInfo(response.data);
+      } catch (error) {
+        console.error('Error fetching hospital info:', error);
+      } finally {
+        setInfoLoading(false);
+      }
+    };
+
+    fetchHospitalInfo();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus({ message: '', type: '' });
+
+    try {
+      const response = await axios.post(`${API_URL}/api/contact/`, formData);
+      setStatus({
+        message: 'Thank you for your message. We will get back to you soon!',
+        type: 'success'
+      });
+      // Clear form
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error) {
+      setStatus({
+        message: 'There was an error sending your message. Please try again.',
+        type: 'danger'
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (infoLoading || loading) {
+    return <Spinner3D />; // Show spinner while loading hospital info or sending message
+  }
 
   return (
     <Container className="py-5 py-4 mt-5">
@@ -16,50 +85,86 @@ function Contact() {
         <Col md={4} className="text-center mb-4 mb-md-0">
           <FaPhone className="text-primary mb-3" size={30} />
           <h4>Phone</h4>
-          <p>(555) 123-4567</p>
+          <p>{hospitalInfo?.phone || 'Not available'}</p>
         </Col>
         <Col md={4} className="text-center mb-4 mb-md-0">
           <FaEnvelope className="text-primary mb-3" size={30} />
           <h4>Email</h4>
-          <p>info@medicalcenter.com</p>
+          <p>{hospitalInfo?.email || 'Not available'}</p>
         </Col>
         <Col md={4} className="text-center">
           <FaMapMarkerAlt className="text-primary mb-3" size={30} />
           <h4>Address</h4>
-          <p>123 Medical Center Drive<br />New York, NY 10001</p>
+          <p>{hospitalInfo?.address || 'Not available'}</p>
         </Col>
       </Row>
 
       <Row className="justify-content-center">
         <Col md={8}>
+          {status.message && (
+            <Alert variant={status.type} className="mb-4">
+              {status.message}
+            </Alert>
+          )}
+
           <Form onSubmit={handleSubmit}>
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>Name</Form.Label>
-                  <Form.Control type="text" required />
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" required />
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
               </Col>
             </Row>
 
             <Form.Group className="mb-3">
               <Form.Label>Subject</Form.Label>
-              <Form.Control type="text" required />
+              <Form.Control
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                required
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Message</Form.Label>
-              <Form.Control as="textarea" rows={5} required />
+              <Form.Control
+                as="textarea"
+                rows={5}
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+              />
             </Form.Group>
 
-            <Button variant="primary" type="submit" className="w-100">
-              Send Message
+            <Button 
+              variant="primary" 
+              type="submit" 
+              className="w-100"
+              disabled={loading}
+            >
+              {loading ? 'Sending...' : 'Send Message'}
             </Button>
           </Form>
         </Col>

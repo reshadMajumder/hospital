@@ -1,53 +1,58 @@
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import { FaHospital, FaStethoscope, FaUserMd, FaTooth } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import ServiceSection from '../services/ServiceSection';
 import ServiceHeader from '../services/ServiceHeader';
+import axios from 'axios';
+import API_URL from '../../data/ApiData';
 import '../../styles/services.css';
+import Spinner3D from '../common/Spinner3D';
 
 const Services = () => {
-  const hospitalServices = [
-    'Mount Adora Neurology',
-    'Mount Adora Economy',
-    'ICU,CCU,HDU',
-    'State-of-art Operation Theatre',
-    'Specialized Cardiology Department with avant Cardiac Catheterization Laboratory',
-    'Dialysis',
-    'Physiotherapy',
-    'Gastro-liver Care',
-    'ENT Care',
-    'Burn, Trauma, and Orthopedics Care',
-    'Gyne and Obs. Care'
-  ];
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const diagnosticServices = [
-    'Siemens (Germany) 1.5 Tesla, 48 Channel MRI and 128 Slice CT-Scan',
-    'Endoscopy and Colonoscopy with Olympus Machine',
-    'First time in sylhet, Dedicated Fibre Optic Laryngoscopy (FOL) Machine',
-    'Video EEG, NCV,NCS, Holter Monitoring, ECHO, ETT, ECG , USG, X-Ray, Uroflowmetry etc Facility',
-    'Biochemistry report with VITROS-350 and immunology report with Architect i1000',
-    'Fully Autometed Apharsis Machine',
-    'Sleep Study Lab for Sleep Apnea Patients'
-  ];
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/services/`);
+        setServices(response.data);
+      } catch (err) {
+        setError('Error fetching services data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  if (loading) {
+    return <Spinner3D />;
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-5 text-danger">
+        <h3>{error}</h3>
+      </div>
+    );
+  }
 
   return (
-    <div className="services-page">
+    <div className="services-page mt-4">
       <ServiceHeader />
       <Container>
         <Row>
-          <Col lg={6} className="mb-4">
-            <ServiceSection 
-              title="Hospital Services"
-              icon="/images/hospital-icon.svg"
-              services={hospitalServices}
-            />
-          </Col>
-          <Col lg={6} className="mb-4">
-            <ServiceSection 
-              title="Diagnostic Services"
-              icon="/images/diagnostic-icon.svg"
-              services={diagnosticServices}
-            />
-          </Col>
+          {services.map((service) => (
+            <Col lg={6} className="mb-4" key={service.id}>
+              <ServiceSection 
+                title={service.title}
+                icon={`${API_URL}${service.icon}`}
+                services={service.services.map(item => item.name)}
+              />
+            </Col>
+          ))}
         </Row>
       </Container>
     </div>

@@ -5,6 +5,7 @@ import DoctorProfile from '../doctors/DoctorProfile';
 import { FaArrowLeft, FaUserMd, FaBed, FaCalendarCheck, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 import API_URL from '../../data/ApiData';
+import Spinner3D from '../common/Spinner3D'; // Import the spinner component
 
 function Departments() {
   const [departments, setDepartments] = useState([]);
@@ -62,7 +63,7 @@ function Departments() {
     setShowProfile(true);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Spinner3D />; // Show spinner while loading
   if (error) return <div>{error}</div>;
 
   return (

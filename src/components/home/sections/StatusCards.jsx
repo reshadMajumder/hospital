@@ -1,11 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { FaCalendarAlt, FaClock, FaTimes } from 'react-icons/fa';
+import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 import { Modal } from 'react-bootstrap';
+import axios from 'axios';
+import API_URL from '../../../data/ApiData';
+import Spinner3D from '../../common/Spinner3D';
 
 function StatusCards() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [hospitalInfo, setHospitalInfo] = useState(null);
+  const [loading, setLoading] = useState(true); // New loading state
+
+  useEffect(() => {
+    const fetchHospitalInfo = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/hospital-info/`);
+        setHospitalInfo(response.data);
+      } catch (error) {
+        console.error('Error fetching hospital info:', error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
+      }
+    };
+
+    fetchHospitalInfo();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -41,6 +61,10 @@ function StatusCards() {
     { day: 'Sunday', hours: '8:00 AM - 8:00 PM' },
   ];
 
+  if (loading) {
+    return <Spinner3D />; // Show spinner while loading
+  }
+
   return (
     <>
       <div className="status-cards-wrapper">
@@ -49,7 +73,9 @@ function StatusCards() {
             <div className="card-inner">
               <h4 className="text-primary mb-2">Book Appointment</h4>
               <p className="mb-0">Get instant appointment </p>
-              <p className="text-primary mt-2 fw-bold">Hotline: 1-800-HEALTH-CARE</p>
+              <p className="text-primary mt-2 fw-bold">
+                Hotline: {hospitalInfo?.phone || 'Loading...'}
+              </p>
             </div>
           </div>
           
