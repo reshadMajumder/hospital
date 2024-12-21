@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import DoctorCard from '../doctors/DoctorCard';
 import DoctorProfile from '../doctors/DoctorProfile';
 import axios from 'axios';
-
+import API_URL from '../../data/ApiData';
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const Doctors = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get('https://hospital-api-tau.vercel.app/api/doctors/');
+        const response = await axios.get(`${API_URL}/api/doctors/`);
         setDoctors(response.data);
         setLoading(false);
       } catch (err) {

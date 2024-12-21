@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Row, Col } from 'react-bootstrap';
 import { motion } from 'framer-motion';
+import API_URL from '../../data/ApiData';
 
 const DoctorProfile = ({ doctor, show, onHide }) => {
   if (!doctor) return null;
@@ -20,7 +21,7 @@ const DoctorProfile = ({ doctor, show, onHide }) => {
       <Modal.Body className="p-4">
         <div className="profile-image-container">
           <motion.img
-            src={`https://hospital-api-tau.vercel.app${doctor.image}`}
+            src={`${API_URL}${doctor.image}`}
             alt={doctor.name}
             className="profile-image"
             initial={{ scale: 0.5 }}

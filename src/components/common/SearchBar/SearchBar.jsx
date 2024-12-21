@@ -3,6 +3,7 @@ import { Form } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../../../data/ApiData';
 import './SearchBar.css';
 
 function SearchBar({ initialValue = '', onSearchChange }) {
@@ -45,7 +46,7 @@ function SearchBar({ initialValue = '', onSearchChange }) {
 
       setLoading(true);
       try {
-        const response = await axios.get(`https://hospital-api-tau.vercel.app/api/doctors/search/?query=${searchTerm}`);
+        const response = await axios.get(`${API_URL}/api/doctors/search/?query=${searchTerm}`);
         setSuggestions(response.data);
         setShowSuggestions(true);
       } catch (error) {

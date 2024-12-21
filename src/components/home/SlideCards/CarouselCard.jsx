@@ -4,6 +4,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import API_URL from '../../../data/ApiData';
 
 function CarouselCard({ title, icon, items }) {
   return (
@@ -13,7 +14,7 @@ function CarouselCard({ title, icon, items }) {
           <h3>{title}</h3>
           {icon && (
             <img 
-              src={`https://hospital-api-tau.vercel.app${icon}`} 
+              src={`${API_URL}${icon}`} 
               alt={title} 
               className="card-icon"
               style={{ width: '24px', height: '24px', marginLeft: '8px' }}
@@ -44,7 +45,7 @@ function CarouselCard({ title, icon, items }) {
               <div 
                 className="mini-card"
                 style={{
-                  backgroundImage: `url(https://hospital-api-tau.vercel.app${icon})`,
+                  backgroundImage: `url(${API_URL}${icon})`,
                 }}
               >
                 <h4>{item}</h4>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import GoogleMapComponent from '../../maps/GoogleMapComponent';
 import axios from 'axios';
+import API_URL from '../../../data/ApiData';
 
 function LocationSection() {
   const [contactInfo, setContactInfo] = useState(null);
@@ -9,7 +10,7 @@ function LocationSection() {
   useEffect(() => {
     const fetchContactInfo = async () => {
       try {
-        const response = await axios.get('https://hospital-api-tau.vercel.app/api/hospital-info/');
+        const response = await axios.get(`${API_URL}/api/hospital-info/`);
         setContactInfo(response.data);
       } catch (error) {
         console.error('Error fetching contact info:', error);

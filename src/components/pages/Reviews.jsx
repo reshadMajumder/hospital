@@ -7,6 +7,7 @@ import axios from 'axios';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
+import API_URL from '../../data/ApiData';
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -24,7 +25,7 @@ function Reviews() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get('https://hospital-api-tau.vercel.app/api/reviews/');
+        const response = await axios.get(`${API_URL}/api/reviews/`);
         setReviews(response.data);
         setLoading(false);
       } catch (err) {
@@ -39,7 +40,7 @@ function Reviews() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://hospital-api-tau.vercel.app/api/reviews/', formData);
+      const response = await axios.post(`${API_URL}/api/reviews/`, formData);
       setSubmitStatus({
         message: 'Thank you for your review! It will be visible after moderation.',
         type: 'success'

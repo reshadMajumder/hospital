@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, Button } from 'react-bootstrap';
 import '../../styles/DoctorCard.css';
+import API_URL from '../../data/ApiData';
 
 const DoctorCard = ({ doctor, onViewProfile }) => {
   return (
@@ -13,7 +14,7 @@ const DoctorCard = ({ doctor, onViewProfile }) => {
     >
       <div className="doctor-image-container">
         <motion.img
-          src={`https://hospital-api-tau.vercel.app${doctor.image}`}
+          src={`${API_URL}${doctor.image}`}
           alt={doctor.name}
           className="profile-image"
           whileHover={{ scale: 1.1 }}

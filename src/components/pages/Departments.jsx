@@ -4,6 +4,7 @@ import DoctorCard from '../doctors/DoctorCard';
 import DoctorProfile from '../doctors/DoctorProfile';
 import { FaArrowLeft, FaUserMd, FaBed, FaCalendarCheck, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
+import API_URL from '../../data/ApiData';
 
 function Departments() {
   const [departments, setDepartments] = useState([]);
@@ -20,8 +21,8 @@ function Departments() {
       try {
         // Fetch both departments and doctors
         const [departmentsResponse, doctorsResponse] = await Promise.all([
-          axios.get('https://hospital-api-tau.vercel.app/api/departments/'),
-          axios.get('https://hospital-api-tau.vercel.app/api/doctors/')
+          axios.get(`${API_URL}/api/departments/`),
+          axios.get(`${API_URL}/api/doctors/`)
         ]);
 
         // Add additional info to departments data
@@ -79,7 +80,7 @@ function Departments() {
                     <div className="logo-circle">
                       {department.icon ? (
                         <img 
-                          src={`https://hospital-api-tau.vercel.app${department.icon}`}
+                          src={`${API_URL}${department.icon}`}
                           alt={department.name}
                           style={{ width: '40px', height: '40px', objectFit: 'contain' }}
                         />

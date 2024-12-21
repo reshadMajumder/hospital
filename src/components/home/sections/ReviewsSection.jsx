@@ -7,6 +7,7 @@ import axios from 'axios';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
+import API_URL from '../../../data/ApiData';
 
 function ReviewsSection() {
   const [reviews, setReviews] = useState([]);
@@ -16,7 +17,7 @@ function ReviewsSection() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get('https://hospital-api-tau.vercel.app/api/reviews/');
+        const response = await axios.get(`${API_URL}/api/reviews/`);
         const formattedReviews = response.data.map(review => ({
           id: review.id,
           name: review.name,

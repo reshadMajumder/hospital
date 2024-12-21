@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import DoctorCard from '../doctors/DoctorCard';
 import DoctorProfile from '../doctors/DoctorProfile';
 import axios from 'axios';
+import API_URL from '../../data/ApiData';
 
 const Staff = () => {
   const [staff, setStaff] = useState([]);
@@ -17,7 +18,7 @@ const Staff = () => {
   useEffect(() => {
     const fetchStaff = async () => {
       try {
-        const response = await axios.get('https://hospital-api-tau.vercel.app/api/staff/');
+        const response = await axios.get(`${API_URL}/api/staff/`);
         setStaff(response.data);
         setLoading(false);
       } catch (err) {

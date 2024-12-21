@@ -1,6 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import CountUp from 'react-countup';
 import { useEffect, useState } from 'react';
+import API_URL from '../../../data/ApiData';
 
 function StatsSection() {
   const [stats, setStats] = useState([]);
@@ -8,7 +9,7 @@ function StatsSection() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch('https://hospital-api-tau.vercel.app/api/hospital-stats/');
+        const response = await fetch(`${API_URL}/api/hospital-stats/`);
         const data = await response.json();
         const formattedStats = [
           { value: data.patientsTreated, label: 'Patients Treated', suffix: '+' },

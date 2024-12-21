@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CarouselCard from './CarouselCard';
 import axios from 'axios';
+import API_URL from '../../../data/ApiData';
 
 function FloatingCards() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function FloatingCards() {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await axios.get('https://hospital-api-tau.vercel.app/api/card-slider/');
+        const response = await axios.get(`${API_URL}/api/card-slider/`);
         setCards(response.data);
         setLoading(false);
       } catch (err) {
