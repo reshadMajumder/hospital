@@ -1,12 +1,13 @@
+// for production
+
+const API_URL = 'https://exoverse.pythonanywhere.com';   
 
 
 
 
-const API_URL = 'https://exoverse.pythonanywhere.com';   // for production
+// for development
 
-
-
-// const API_URL = 'http://127.0.0.1:8000';   // for development
+// const API_URL = 'http://127.0.0.1:8000';   
 
 
 
