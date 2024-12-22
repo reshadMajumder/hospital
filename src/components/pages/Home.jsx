@@ -7,6 +7,7 @@ function Home() {
   return (
     <main>
       <Hero />
+      
       <Stats />
       <WhyChooseUs />
       <Location />
