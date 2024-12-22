@@ -16,6 +16,7 @@ import DoctorProfile from './components/doctors/DoctorProfile';
 import './styles/SlideCards.css';
 import './styles/Sections.css';
 import './styles/Reviews.css';
+import Spinner3D from './components/common/Spinner3D';
 function App() {
   return (
     <Router>
@@ -32,6 +33,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/Doctor-profile" element={<DoctorProfile />} />
+            <Route path="/spinner" element={<Spinner3D />} />
           </Routes>
         </main>
         <BottomNavigation />

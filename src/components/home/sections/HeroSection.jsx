@@ -24,23 +24,31 @@ function HeroSection() {
     fetchHospitalInfo();
   }, []);
 
-  if (loading) {
-    return <Spinner3D />;
-  }
+  if (loading) return <Spinner3D />;
+  if (!hospitalInfo) return null;
+
+  const heroStyle = {
+    backgroundImage: `url(${API_URL}${hospitalInfo.home_Banner})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat'
+  };
 
   return (
-    <section className="hero-section">
+    <section className="hero-section" style={heroStyle}>
       <Container>
         <Row className="justify-content-center">
-          <Col lg={8} className="text-center">
+          <Col lg={10} className="text-center">
             <h1 className="animate__animated animate__fadeInDown">
-              {hospitalInfo?.home_header || 'Your Health - Our Priority'}
+              {hospitalInfo.home_header}
             </h1>
-            <p className="lead animate__animated animate__fadeInUp mb-4">
-              {hospitalInfo?.home_header_two || 'Find the right doctor for your needs'}
+            <p className="lead animate__animated animate__fadeInUp">
+              {hospitalInfo.home_header_two}
             </p>
             <div className="animate__animated animate__fadeInUp">
-              <SearchBar />
+              <div className="search-container">
+                <SearchBar />
+              </div>
             </div>
           </Col>
         </Row>

@@ -6,7 +6,6 @@ import API_URL from '../../../data/ApiData';
 import Spinner3D from '../../common/Spinner3D';
 
 function StatusCards() {
-  const [currentDate, setCurrentDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
   const [hospitalInfo, setHospitalInfo] = useState(null);
@@ -30,8 +29,6 @@ function StatusCards() {
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
-      setCurrentDate(now);
-      
       const isSaturday = now.getDay() === 6;
       const hour = now.getHours();
       const isWorkingHours = hour >= 8 && hour < 20;
@@ -42,23 +39,14 @@ function StatusCards() {
     return () => clearInterval(timer);
   }, []);
 
-  const formatDate = (date) => {
-    return date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
   const weeklySchedule = [
     { day: 'Monday', hours: '8:00 AM - 8:00 PM' },
     { day: 'Tuesday', hours: '8:00 AM - 8:00 PM' },
     { day: 'Wednesday', hours: '8:00 AM - 8:00 PM' },
     { day: 'Thursday', hours: '8:00 AM - 8:00 PM' },
     { day: 'Friday', hours: '8:00 AM - 8:00 PM' },
-    { day: 'Saturday', hours: 'Closed' },
-    { day: 'Sunday', hours: '8:00 AM - 8:00 PM' },
+    { day: 'Saturday', hours: '8:00 AM - 8:00 PM' },
+    { day: 'Sunday', hours: 'Closed' },
   ];
 
   if (loading) {
@@ -83,9 +71,8 @@ function StatusCards() {
             <div className="card-inner">
               <div className="d-flex align-items-center mb-2">
                 <FaCalendarAlt className="calendar-icon me-2" />
-                <h4 className="text-primary mb-0">Today's Date</h4>
+                <h4 className="text-primary mb-0">Open Weekly Schedule</h4>
               </div>
-              <p className="mb-0">{formatDate(currentDate)}</p>
               <p className={`mt-2 fw-bold ${isOpen ? 'text-success' : 'text-danger'}`}>
                 {isOpen ? 'Open Today' : 'Closed Today'}
               </p>
@@ -118,7 +105,7 @@ function StatusCards() {
             {weeklySchedule.map((schedule, index) => (
               <div 
                 key={schedule.day} 
-                className={`schedule-item ${currentDate.getDay() === index + 1 ? 'current-day' : ''}`}
+                className={`schedule-item`}
               >
                 <div className="day-name">{schedule.day}</div>
                 <div className="hours">
