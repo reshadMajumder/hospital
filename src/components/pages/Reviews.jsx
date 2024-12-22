@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules';
 import { FaStar, FaQuoteRight, FaUserCircle } from 'react-icons/fa';
@@ -22,6 +22,8 @@ function Reviews() {
     visibility: false
   });
   const [submitStatus, setSubmitStatus] = useState({ message: '', type: '' });
+  const [showModal, setShowModal] = useState(false);
+  const [fullReviewText, setFullReviewText] = useState('');
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -60,6 +62,36 @@ function Reviews() {
         type: 'error'
       });
     }
+  };
+
+  const handleShowModal = (reviewText) => {
+    setFullReviewText(reviewText);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const formatReviewText = (text) => {
+    const words = text.split(' ');
+    if (words.length > 30) {
+      return text; // Return full text for scrolling
+    }
+    return text;
+  };
+
+  const renderStars = (rating) => {
+    return [...Array(5)].map((_, index) => (
+      <FaStar
+        key={index}
+        className={`star ${index < rating ? 'active' : ''}`}
+        style={{
+          color: index < rating ? '#fbbf24' : '#e5e7eb',
+          marginRight: '2px'
+        }}
+      />
+    ));
   };
 
   if (loading) return <Spinner3D />; // Show spinner while loading
@@ -112,19 +144,31 @@ function Reviews() {
                       </div>
                       <h4>{review.name}</h4>
                       <div className="rating">
-                        {[...Array(5)].map((_, index) => (
-                          <FaStar
-                            key={index}
-                            className={index < review.rating ? 'star active' : 'star'}
-                          />
-                        ))}
+                        {renderStars(review.rating)}
                       </div>
                     </div>
                     <FaQuoteRight className="quote-icon" />
-                    <p className="review-text">{review.review}</p>
-                    <p className="review-date">{new Date(review.date).toLocaleDateString()}</p>
+                    <p className="review-text">
+                      {formatReviewText(review.review)}
+                    </p>
+                    <p className="review-date">
+                      {new Date(review.date).toLocaleDateString()}
+                    </p>
                   </div>
                 </div>
+                <Modal show={showModal} onHide={handleCloseModal} className="modal-3d">
+                  <Modal.Header closeButton>
+                    <Modal.Title>Full Review</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <p>{fullReviewText}</p>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
               </SwiperSlide>
             ))}
           </Swiper>

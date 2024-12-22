@@ -19,13 +19,7 @@ function ReviewsSection() {
     const fetchReviews = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/reviews/`);
-        const formattedReviews = response.data.map(review => ({
-          id: review.id,
-          name: review.name,
-          rating: review.rating,
-          comment: review.review,
-        }));
-        setReviews(formattedReviews);
+        setReviews(response.data);
         setLoading(false);
       } catch (err) {
         setError('Error fetching reviews');
@@ -36,7 +30,28 @@ function ReviewsSection() {
     fetchReviews();
   }, []);
 
-  if (loading) return <p>Loading reviews...</p>;
+  const formatReviewText = (text) => {
+    const words = text.split(' ');
+    if (words.length > 30) {
+      return text; // Return full text for scrolling
+    }
+    return text;
+  };
+
+  const renderStars = (rating) => {
+    return [...Array(5)].map((_, index) => (
+      <FaStar
+        key={index}
+        className={`star ${index < rating ? 'active' : ''}`}
+        style={{
+          color: index < rating ? '#fbbf24' : '#e5e7eb',
+          marginRight: '2px'
+        }}
+      />
+    ));
+  };
+
+  if (loading) return <Spinner3D />;
   if (error) return <p>{error}</p>;
 
   return (
@@ -83,16 +98,16 @@ function ReviewsSection() {
                     </div>
                     <h4>{review.name}</h4>
                     <div className="rating">
-                      {[...Array(5)].map((_, index) => (
-                        <FaStar
-                          key={index}
-                          className={index < review.rating ? 'star active' : 'star'}
-                        />
-                      ))}
+                      {renderStars(review.rating)}
                     </div>
                   </div>
                   <FaQuoteRight className="quote-icon" />
-                  <p className="review-text">{review.comment}</p>
+                  <p className="review-text">
+                    {formatReviewText(review.review)}
+                  </p>
+                  <p className="review-date">
+                    {new Date(review.date).toLocaleDateString()}
+                  </p>
                 </div>
               </div>
             </SwiperSlide>

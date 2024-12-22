@@ -6,6 +6,7 @@ import API_URL from '../../../data/ApiData';
 import Spinner3D from '../../common/Spinner3D';
 
 function StatusCards() {
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
   const [hospitalInfo, setHospitalInfo] = useState(null);
@@ -29,6 +30,8 @@ function StatusCards() {
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
+      setCurrentDate(now);
+      
       const isSaturday = now.getDay() === 6;
       const hour = now.getHours();
       const isWorkingHours = hour >= 8 && hour < 20;
@@ -105,7 +108,7 @@ function StatusCards() {
             {weeklySchedule.map((schedule, index) => (
               <div 
                 key={schedule.day} 
-                className={`schedule-item`}
+                className={`schedule-item ${currentDate.getDay() === index + 1 ? 'current-day' : ''}`}
               >
                 <div className="day-name">{schedule.day}</div>
                 <div className="hours">
