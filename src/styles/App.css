@@ -856,20 +856,11 @@ footer {
   }
 
   .hero-section h1 {
-    text-shadow: 
-      1px 1px 0 #fff,
-      -1px -1px 0 #fff,
-      1px -1px 0 #fff,
-      -1px 1px 0 #fff,
-      2px 2px 4px rgba(0, 0, 0, 0.1);
+
   }
 
   .hero-section .lead {
-    text-shadow: 
-      1px 1px 0 #fff,
-      -1px -1px 0 #fff,
-      1px -1px 0 #fff,
-      -1px 1px 0 #fff;
+
   }
 }
 
