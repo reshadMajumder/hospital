@@ -49,7 +49,26 @@ function CarouselCard({ title, icon, items }) {
 
                 }}
               >
-                <h4>{item}</h4>
+                <h4 style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '600',
+                  color: '#4A4A4A',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  textShadow: '1px 1px 2px rgba(0, 0, 0, 0.2), 0 0 25px rgba(0, 0, 0, 0.1)',
+                  transition: 'transform 0.3s, color 0.3s',
+                }} 
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.color = '#2196F3'; // Change color on hover
+                }} 
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.color = '#4A4A4A'; // Reset color
+                }}
+                >"
+                  {item}
+                "</h4>
               </div>
             </SwiperSlide>
           ))}

@@ -1,36 +1,41 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import { FaUserMd, FaHospital, FaClock, FaAmbulance } from 'react-icons/fa';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import API_URL from '../../../data/ApiData';
+import Spinner3D from '../../common/Spinner3D';
 
 function WhyChooseUsSection() {
   const [activeCard, setActiveCard] = useState(null);
+  const [reasons, setReasons] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const reasons = [
-    {
-      icon: <FaUserMd />,
-      title: 'Expert Doctors',
-      description: 'Our team consists of highly qualified and experienced medical professionals.',
-      color: '#2196F3'
-    },
-    {
-      icon: <FaHospital />,
-      title: 'Modern Facilities',
-      description: 'State-of-the-art medical equipment and comfortable environment.',
-      color: '#4CAF50'
-    },
-    {
-      icon: <FaClock />,
-      title: '24/7 Service',
-      description: 'Round-the-clock medical care and emergency services.',
-      color: '#FF5722'
-    },
-    {
-      icon: <FaAmbulance />,
-      title: 'Emergency Care',
-      description: 'Quick response time and efficient emergency medical services.',
-      color: '#9C27B0'
-    }
-  ];
+  useEffect(() => {
+    const fetchReasons = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/why-trust-us/`);
+        // Add color property to each reason
+        const reasonsWithColors = response.data.map((reason, index) => ({
+          ...reason,
+          color: getColorByIndex(index)
+        }));
+        setReasons(reasonsWithColors);
+      } catch (error) {
+        console.error('Error fetching reasons:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReasons();
+  }, []);
+
+  // Helper function to assign colors
+  const getColorByIndex = (index) => {
+    const colors = ['#2196F3', '#4CAF50', '#FF5722', '#9C27B0'];
+    return colors[index % colors.length];
+  };
+
+  if (loading) return <Spinner3D />;
 
   return (
     <section className="why-choose-us">
@@ -41,7 +46,7 @@ function WhyChooseUsSection() {
         </div>
         <Row className="justify-content-center">
           {reasons.map((reason, index) => (
-            <Col sm={6} lg={3} className="mb-3" key={index}>
+            <Col sm={6} lg={3} className="mb-3" key={reason.id}>
               <div
                 className={`feature-box ${activeCard === index ? 'active' : ''}`}
                 onMouseEnter={() => setActiveCard(index)}
@@ -53,7 +58,11 @@ function WhyChooseUsSection() {
                     <div className="icon-container">
                       <div className="icon-circle"></div>
                       <div className="icon-wrapper">
-                        {reason.icon}
+                        <img 
+                          src={`${API_URL}${reason.icon}`} 
+                          alt={reason.title}
+                          style={{ width: '30px', height: '30px' }}
+                        />
                       </div>
                     </div>
                     <h3>{reason.title}</h3>
@@ -61,7 +70,6 @@ function WhyChooseUsSection() {
                   </div>
                   <div className="feature-back">
                     <p>{reason.description}</p>
-                    
                   </div>
                 </div>
                 <div className="glow"></div>
