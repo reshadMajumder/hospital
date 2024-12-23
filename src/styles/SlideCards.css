@@ -128,9 +128,13 @@
   .mini-card h4 {
     position: relative;
     z-index: 2;
-    font-size: 1.1rem;
-    color: #333;
-    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.3s, color 0.3s;
+    text-shadow: none;
   }
   
   .mini-card:hover {
@@ -778,9 +782,10 @@
   
   .department-icon-wrapper h3 {
     margin-top: 0.1rem;
-    font-size: 1.2rem;
-    color: #4A4A4A;
+    font-size: 1.1rem;
+    color: #000000;
     font-weight: 600;
+    text-shadow: none;
   }
   
   .department-card-header {

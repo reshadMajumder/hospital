@@ -18,7 +18,14 @@ function CarouselCard({ title, icon, items }) {
                 className="department-card-icon"
                 style={{ width: '35px', height: '35px' }}
               />
-              <h3 className="mt-2">{title}</h3>
+              <h3 className="mt-2" style={{ 
+                color: '#000000',
+                fontWeight: '600',
+                fontSize: '1.1rem',
+                textShadow: 'none'
+              }}>
+                {title}
+              </h3>
             </div>
           )}
         </div>
@@ -41,22 +48,13 @@ function CarouselCard({ title, icon, items }) {
             <SwiperSlide key={index}>
               <div className="mini-card">
                 <h4 
-                  style={{
-                    fontSize: '1.4rem',
-                    fontWeight: '600',
-                    color: '#4A4A4A',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.2), 0 0 25px rgba(0, 0, 0, 0.1)',
-                    transition: 'transform 0.3s, color 0.3s',
-                  }} 
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'scale(1.1)';
                     e.currentTarget.style.color = '#2196F3';
                   }} 
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.color = '#4A4A4A';
+                    e.currentTarget.style.color = '#000000';
                   }}
                 >
                   {item}
