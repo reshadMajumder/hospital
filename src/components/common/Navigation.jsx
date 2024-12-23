@@ -1,25 +1,10 @@
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function Navigation() {
   const location = useLocation();
   const [expanded, setExpanded] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    // Check if system is in dark mode
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(darkModeMediaQuery.matches);
-
-    // Listen for theme changes
-    const handleThemeChange = (e) => setIsDarkMode(e.matches);
-    darkModeMediaQuery.addEventListener('change', handleThemeChange);
-
-    return () => {
-      darkModeMediaQuery.removeEventListener('change', handleThemeChange);
-    };
-  }, []);
 
   const closeNav = () => setExpanded(false);
 
@@ -35,8 +20,8 @@ function Navigation() {
       <Container>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center" onClick={closeNav}>
           <img
-            src={isDarkMode ? "/images/logo-black.png" : "/images/logo-white.png"}
-            alt="Medical Center Logo"
+            src="/images/logo.png"
+            alt="Medical Center image"
             height="40"
             className="me-2"
           />
