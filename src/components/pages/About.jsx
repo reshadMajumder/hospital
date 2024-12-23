@@ -4,6 +4,7 @@ import axios from 'axios';
 import API_URL from '../../data/ApiData';
 import Spinner3D from '../common/Spinner3D';
 import '../../styles/About.css';
+import StatsSection from '../home/sections/StatsSection';
 
 function About() {
   const [currentImage, setCurrentImage] = useState(0);
@@ -77,6 +78,7 @@ function About() {
           </div>
         </div>
       </div>
+      <StatsSection />
 
       <Container className="py-5">
         <Row className="align-items-center g-5">

@@ -1,10 +1,12 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import CountUp from 'react-countup';
 import { useEffect, useState } from 'react';
+import { FaUserMd, FaHospital, FaUsers, FaHandHoldingMedical } from 'react-icons/fa';
 import API_URL from '../../../data/ApiData';
 
 function StatsSection() {
   const [stats, setStats] = useState([]);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -12,10 +14,30 @@ function StatsSection() {
         const response = await fetch(`${API_URL}/api/hospital-stats/`);
         const data = await response.json();
         const formattedStats = [
-          { value: data.patientsTreated, label: 'Patients Treated', suffix: '+' },
-          { value: data.doctorsCount, label: 'Expert Consultants', suffix: '+' },
-          { value: data.hospitalAge, label: 'Years Experience', suffix: '+' },
-          { value: data.staffsCount, label: 'Dedicated Staff', suffix: '+' }
+          { 
+            value: data.patientsTreated, 
+            label: 'Patients Treated', 
+            suffix: '+',
+            icon: <FaHandHoldingMedical />
+          },
+          { 
+            value: data.doctorsCount, 
+            label: 'Expert Consultants', 
+            suffix: '+',
+            icon: <FaUserMd />
+          },
+          { 
+            value: data.hospitalAge, 
+            label: 'Years Experience', 
+            suffix: '+',
+            icon: <FaHospital />
+          },
+          { 
+            value: data.staffsCount, 
+            label: 'Dedicated Staff', 
+            suffix: '+',
+            icon: <FaUsers />
+          }
         ];
         setStats(formattedStats);
       } catch (error) {
@@ -27,17 +49,30 @@ function StatsSection() {
   }, []);
 
   return (
-    <section className="stats-section mb-2">
+    <section className="stats-section">
       <Container>
-        <Row>
+        <Row className="justify-content-center">
           {stats.map((stat, index) => (
-            <Col md={3} className="text-center mb-4 mb-md-0" key={index}>
-              <div className="stat-item">
-                <h2>
-                  <CountUp end={stat.value} duration={2.5} />
-                  {stat.suffix}
-                </h2>
-                <p className="text-muted mb-0">{stat.label}</p>
+            <Col md={6} lg={3} className="mb-4" key={index}>
+              <div 
+                className="stat-card"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <div className="stat-icon">{stat.icon}</div>
+                <div className="stat-content">
+                  <h2 className="stat-number">
+                    <CountUp 
+                      end={stat.value} 
+                      duration={2} 
+                      start={hoveredIndex === index ? 0 : stat.value}
+                      separator=","
+                    />
+                    {stat.suffix}
+                  </h2>
+                  <p className="stat-label">{stat.label}</p>
+                </div>
+                <div className="stat-glow"></div>
               </div>
             </Col>
           ))}

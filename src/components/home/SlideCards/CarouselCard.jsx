@@ -16,8 +16,8 @@ function CarouselCard({ title, icon, items }) {
             <img 
               src={`${API_URL}${icon}`} 
               alt={title} 
-              className="card-icon"
-              style={{ width: '24px', height: '24px', marginLeft: '8px' }}
+              className="department-card-icon"
+              style={{ width: '35px', height: '35px', marginLeft: '8px' }}
             />
           )}
         </div>
@@ -45,7 +45,8 @@ function CarouselCard({ title, icon, items }) {
               <div 
                 className="mini-card"
                 style={{
-                  backgroundImage: `url(${API_URL}${icon})`,
+                  // backgroundImage: `url(${API_URL}${icon})`,
+
                 }}
               >
                 <h4>{item}</h4>

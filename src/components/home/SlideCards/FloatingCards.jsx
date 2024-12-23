@@ -39,6 +39,7 @@ function FloatingCards() {
           <div key={card.id} onClick={() => handleCardClick(card.path)}>
             <CarouselCard
               title={card.title.replace(/([A-Z])/g, ' $1').trim()}
+              icon={card.icon} // Show icon
               items={card.items.map(item => item.title)}
             />
           </div>
