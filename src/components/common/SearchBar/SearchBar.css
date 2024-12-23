@@ -48,7 +48,7 @@
 }
 
 .search-suggestions {
-  position: absolute;
+  position: static;
   top: calc(100% + 8px);
   left: 0;
   right: 0;
@@ -66,12 +66,12 @@
 }
 
 .suggestion-item {
-  padding: 14px 20px;
+  padding: 0.75rem 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 1rem;
   border-bottom: 1px solid rgba(241, 245, 249, 0.6);
 }
 
@@ -81,27 +81,40 @@
 
 .suggestion-item:hover {
   background: rgba(59, 130, 246, 0.04);
-  transform: translateX(5px);
+}
+
+.suggestion-item:hover .suggestion-image {
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.suggestion-item:hover .suggestion-image img {
+  transform: scale(1.1);
 }
 
 .suggestion-text {
-  display: flex;
+  display: contents;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
+  min-width: 0;
 }
 
 .suggestion-name {
   color: #1e293b;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .suggestion-info {
   color: #64748b;
   font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .suggestion-info::before {
@@ -132,7 +145,7 @@
   justify-content: center;
   color: #64748b;
   font-size: 0.9rem;
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 /* Responsive */
@@ -155,5 +168,44 @@
 
   .suggestion-name {
     font-size: 0.95rem;
+  }
+
+  .suggestion-image {
+    width: 30px;
+    height: 30px;
+  }
+
+  .suggestion-name {
+    font-size: 0.9rem;
+  }
+
+  .suggestion-info {
+    font-size: 0.8rem;
+  }
+} 
+
+/* Add/Update these styles */
+.suggestion-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(var(--primary-rgb), 0.1);
+  transition: all 0.3s ease;
+}
+
+.suggestion-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Update mobile styles */
+@media (max-width: 768px) {
+  .suggestion-image {
+    width: 30px; /* Keep same size on mobile */
+    height: 30px;
   }
 } 

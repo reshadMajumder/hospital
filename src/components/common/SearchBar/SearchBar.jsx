@@ -69,16 +69,7 @@ function SearchBar({ initialValue = '', onSearchChange }) {
   };
 
   const handleSuggestionClick = (doctor) => {
-    handleSearchTermChange(doctor.name);
-    if (location.pathname === '/doctors') {
-      // If already on doctors page, just update the search term
-      onSearchChange?.(doctor.name);
-    } else {
-      // If not on doctors page, navigate and pass the search term
-      navigate('/doctors', { 
-        state: { searchTerm: doctor.name }
-      });
-    }
+    navigate(`/doctors/${doctor.id}`);
     setShowSuggestions(false);
   };
 
@@ -107,10 +98,19 @@ function SearchBar({ initialValue = '', onSearchChange }) {
                   className="suggestion-item"
                   onClick={() => handleSuggestionClick(doctor)}
                 >
+                  <div className="suggestion-image">
+                    <img 
+                      src={`${API_URL}${doctor.image}`} 
+                      alt={doctor.name}
+                      onError={(e) => {
+                        e.target.src = '/default-doctor.png'; // Fallback image
+                      }}
+                    />
+                  </div>
                   <div className="suggestion-text">
                     <span className="suggestion-name">{doctor.name}</span>
                     <span className="suggestion-info">
-                      {doctor.specialty} {doctor.department}
+                      {doctor.specialty} • {doctor.department}
                     </span>
                   </div>
                 </div>
