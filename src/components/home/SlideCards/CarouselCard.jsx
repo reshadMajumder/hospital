@@ -1,9 +1,8 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import API_URL from '../../../data/ApiData';
 
 function CarouselCard({ title, icon, items }) {
@@ -24,12 +23,8 @@ function CarouselCard({ title, icon, items }) {
           )}
         </div>
         <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
+          modules={[Navigation, Autoplay]}
           navigation={true}
-          pagination={{
-            clickable: true,
-            dynamicBullets: true,
-          }}
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
@@ -47,7 +42,7 @@ function CarouselCard({ title, icon, items }) {
               <div className="mini-card">
                 <h4 
                   style={{
-                    fontSize: '1.5rem',
+                    fontSize: '1.4rem',
                     fontWeight: '600',
                     color: '#4A4A4A',
                     textTransform: 'uppercase',
@@ -64,7 +59,7 @@ function CarouselCard({ title, icon, items }) {
                     e.currentTarget.style.color = '#4A4A4A';
                   }}
                 >
-                  "{item}"
+                  {item}
                 </h4>
               </div>
             </SwiperSlide>
