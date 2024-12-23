@@ -46,7 +46,7 @@ function WhyChooseUsSection() {
         </div>
         <Row className="justify-content-center">
           {reasons.map((reason, index) => (
-            <Col sm={6} lg={3} className="mb-3" key={reason.id}>
+            <Col xs={6} sm={6} md={4} lg={3} className="mb-3" key={reason.id}>
               <div
                 className={`feature-box ${activeCard === index ? 'active' : ''}`}
                 onMouseEnter={() => setActiveCard(index)}
@@ -57,7 +57,7 @@ function WhyChooseUsSection() {
                   <div className="feature-front">
                     <div className="icon-container">
                       <div className="icon-circle"></div>
-                      <div className="icon-wrapper">
+                      <div className="icon-wrapper ">
                         <img 
                           src={`${API_URL}${reason.icon}`} 
                           alt={reason.title}
@@ -65,7 +65,7 @@ function WhyChooseUsSection() {
                         />
                       </div>
                     </div>
-                    <h3>{reason.title}</h3>
+                    <h3 className='text-center'>{reason.title}</h3>
                     <button className="feature-btn">Learn More</button>
                   </div>
                   <div className="feature-back">
