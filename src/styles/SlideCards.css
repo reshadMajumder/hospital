@@ -520,7 +520,7 @@
     padding: 0.5rem;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.139), 
                 0 5px 15px rgba(0, 0, 0, 0.1);
-    height: 200px;
+    height: 220px;
     transform-style: preserve-3d;
     transition: transform 0.2s ease, box-shadow 0.3s ease;
     position: relative;
@@ -585,7 +585,7 @@
   }
   
   .department-card-header h3 {
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     color: #333;
     margin: 0;
   }
@@ -766,4 +766,33 @@
   /* Add this CSS variable for the RGB values of your primary color */
   :root {
     --primary-rgb: 152, 45, 219; /* RGB values for your primary color */
+  }
+  
+  /* Add these styles */
+  .department-icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .department-icon-wrapper h3 {
+    margin-top: 0.1rem;
+    font-size: 1.2rem;
+    color: #4A4A4A;
+    font-weight: 600;
+  }
+  
+  .department-card-header {
+    display: flex;
+    justify-content: center;
+    padding: 0.2rem .1rem;
+  }
+  
+  .department-card-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .department-icon-wrapper:hover .department-card-icon {
+    transform: scale(1.1);
   }

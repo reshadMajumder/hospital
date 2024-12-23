@@ -49,7 +49,7 @@ function StatusCards() {
     { day: 'Thursday', hours: '8:00 AM - 8:00 PM' },
     { day: 'Friday', hours: '8:00 AM - 8:00 PM' },
     { day: 'Saturday', hours: '8:00 AM - 8:00 PM' },
-    { day: 'Sunday', hours: 'Closed' },
+    { day: 'Sunday', hours: '8:00 AM - 8:00 PM' },
   ];
 
   if (loading) {
@@ -76,9 +76,10 @@ function StatusCards() {
                 <FaCalendarAlt className="calendar-icon me-2" />
                 <h4 className="text-primary mb-0">Open Weekly Schedule</h4>
               </div>
-              <p className={`mt-2 fw-bold ${isOpen ? 'text-success' : 'text-danger'}`}>
+              {/* <p className={`mt-2 fw-bold ${isOpen ? 'text-success' : 'text-danger'}`}>
                 {isOpen ? 'Open Today' : 'Closed Today'}
-              </p>
+              </p> */}
+              <p className='mt-2 fw-bold text-success'>Open Today</p>
               <p className="mb-0 text-muted">
                 <FaClock className="me-2" />
                 {isOpen ? '8:00 AM - 8:00 PM' : 'Opens next at 8:00 AM'}

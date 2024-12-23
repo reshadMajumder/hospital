@@ -111,7 +111,7 @@ function Footer() {
             </div>
             <div className="text-center">
               <img src="images/nayem.png" alt="Developer 2" className="rounded-circle shadow" width="100" />
-              <h6>Developer 2</h6>
+              <h6>Md. Nayem Hossain</h6>
               <p><a href="https://developer2website.com" target="_blank" rel="noopener noreferrer">Website</a></p>
               <p><a href="https://github.com/developer2" target="_blank" rel="noopener noreferrer">GitHub</a></p>
             </div>

@@ -18,6 +18,7 @@ function Reviews() {
     name: '',
     rating: 5,
     review: '',
+    email_or_Phone: '',
     date: new Date().toISOString().split('T')[0],
     visibility: false
   });
@@ -43,7 +44,18 @@ function Reviews() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/api/reviews/`, formData);
+      const reviewData = {
+        name: formData.name,
+        rating: formData.rating,
+        review: formData.review,
+        email_or_Phone: formData.email_or_Phone,
+        date: formData.date,
+        visibility: formData.visibility
+      };
+
+      console.log('Sending review data:', reviewData); // Debug log
+
+      const response = await axios.post(`${API_URL}/api/reviews/`, reviewData);
       setSubmitStatus({
         message: 'Thank you for your review! It will be visible after moderation.',
         type: 'success'
@@ -53,10 +65,12 @@ function Reviews() {
         name: '',
         rating: 5,
         review: '',
+        email_or_Phone: '',
         date: new Date().toISOString().split('T')[0],
         visibility: false
       });
     } catch (err) {
+      console.error('Error submitting review:', err.response?.data || err.message);
       setSubmitStatus({
         message: 'Error submitting review. Please try again.',
         type: 'error'
@@ -201,6 +215,20 @@ function Reviews() {
                       required
                     />
                     <label htmlFor="name">Your Name</label>
+                  </Form.Group>
+
+                  <Form.Group className="form-floating mb-4">
+                    <Form.Control
+                      type="text"
+                      id="email_or_Phone"
+                      name="email_or_Phone"
+                      placeholder="Email or Phone"
+                      className="form-input"
+                      value={formData.email_or_Phone}
+                      onChange={(e) => setFormData({...formData, email_or_Phone: e.target.value})}
+                      required
+                    />
+                    <label htmlFor="email_or_Phone">Email or Phone</label>
                   </Form.Group>
 
                   <div className="rating-section text-center mb-4">
