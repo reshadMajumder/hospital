@@ -18,14 +18,14 @@
   }
   
   /* Individual Card Styles */
-  /* .card-container {
+  .card-container {
     flex: 1;
     min-width: 300px;
     max-width: 400px;
     perspective: 1000px;
-  } */
+  }
   
-  /* .floating-card {
+  .floating-card {
     background: var(--white);
     border: 1px solid var(--border-color);
     box-shadow: 
@@ -38,41 +38,41 @@
     transition: transform 0.3s ease;
   } */
   
-  /* .floating-card:hover {
+  .floating-card:hover {
     transform: translateY(-10px);
-  } */
+  } 
   
-  /* .card-header {
+  .card-header {
     text-align: center;
     margin-bottom: 1rem;
-  } */
+  } 
   
-  /* .card-icon {
+  .card-icon {
     font-size: 2rem;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
-  } */
+  }
   
-  /* .card-header h3 {
+  .card-header h3 {
     font-size: 1.3rem;
     color: #333;
     margin: 0;
-  } */
+  }
   
   /* Swiper Styles */
-  /* .mySwiper {
+  .mySwiper {
     width: 60%;
     height: 160px;
     position: relative; 
-  } */
+  }
   
-  /* .swiper-slide {
+  .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 80% !important;
     transition: all 0.3s ease;
-  } */
+  }
   
   /* .mini-card {
     position: relative;
@@ -95,7 +95,7 @@
     transition: all 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  }
+  } */
   
   @keyframes gradientBG {
     0% {
@@ -140,26 +140,26 @@
   
   .mini-card:hover::before {
     opacity: 0.15;
-  } */
+  }
   
   /* Navigation buttons */
-  /* .swiper-button-next,
+  .swiper-button-next,
   .swiper-button-prev {
     transform: translateY(-50%);
     background: var(--white) !important;
     color: var(--primary-color) !important;
     box-shadow: 0 4px 12px rgba(45, 156, 219, 0.15);
   }
-   */
+  
   /* Ensure slides stay centered */
-  /* .swiper-wrapper {
+  .swiper-wrapper {
     display: flex;
     align-items: center;
     transition-timing-function: linear !important;
-  } */
+  }
   
   /* Responsive Adjustments */
-  /* @media (max-width: 1200px) {
+  @media (max-width: 1200px) {
     .cards-row {
       gap: 20px;
     }
@@ -207,7 +207,8 @@
         margin-top: 0;
         padding-top: 50px;
     }
-  }   */
+  }
+  
   /* Add these styles to your existing SlideCards.css */
   .status-cards-wrapper {
     padding: 2rem 0;

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { FaHospital, FaUserMd, FaAward, FaHandHoldingMedical } from 'react-icons/fa';
 import axios from 'axios';
 import API_URL from '../../data/ApiData';
 import Spinner3D from '../common/Spinner3D';

@@ -102,7 +102,7 @@ function Reviews() {
       <div className="reviews-hero">
         <Container>
           <div className="text-center">
-            <h1 className="hero-title">What Our Patients Say About Us</h1>
+            <h1 className="hero-title pt-4">What Our Patients Say About Us</h1>
             <p className="hero-subtitle">
               Real experiences shared by our valued patients who trusted us with their care
             </p>
