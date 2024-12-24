@@ -92,11 +92,11 @@ function Footer() {
         <Row className="align-items-center">
           <Col className="text-center pb-5 mb-1">
             <p className="mb-0">&copy; {new Date().getFullYear()} {hospitalInfo?.name || 'Medical Center'}. All rights reserved.</p>
-            <Button variant="link" onClick={handleShow} className="text-muted" style={{ fontSize: '0.8rem' }}>Developed by</Button>
+            {/* <Button variant="link" onClick={handleShow} className="text-muted" style={{ fontSize: '0.8rem' }}>Developed by</Button> */}
           </Col>
         </Row>
       </Container>
-
+{/* 
       <Modal show={showModal} onHide={handleClose} className="modal-3d">
         <Modal.Header closeButton className="modal-header">
           <Modal.Title>Developer Info</Modal.Title>
@@ -122,7 +122,7 @@ function Footer() {
             Close
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </footer>
   );
 }

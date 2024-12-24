@@ -2026,3 +2026,37 @@ body {
   color: var(--primary-color);
 }
 
+/* Floating Back Button */
+.floating-back-btn {
+  position: fixed;
+  top: 100px; /* Adjust based on your navbar height */
+  left: 20px;
+  z-index: 1000;
+  padding: 12px 24px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.floating-back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background-color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .floating-back-btn {
+    margin-top: 5px;
+    top: 85px; /* Slightly adjusted for mobile */
+    left: 10px; /* Closer to edge on mobile */
+    padding: 8px 16px; /* Smaller padding on mobile */
+    font-size: 0.6rem; /* Slightly smaller text */
+  }
+}
+

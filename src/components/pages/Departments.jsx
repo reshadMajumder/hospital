@@ -31,8 +31,8 @@ function Departments() {
           ...dept,
           description: `Specialized ${dept.name} department providing comprehensive care`,
           doctorsCount: doctorsResponse.data.filter(doc => doc.department.id === dept.id).length,
-          bedsCount: '50+',
-          appointmentsCount: '100+'
+          bedsCount: dept.bedsCount  || 0,
+          monthlyPatients: dept.monthlyPatients || 0
         }));
 
         setDepartments(departmentsWithInfo);
@@ -96,16 +96,20 @@ function Departments() {
                   <div className="department-stats">
                     <div className="stat-item">
                       <FaUserMd />
-                      <span>{department.doctorsCount || '0'} Doctors</span>
+                      <span>{department.doctorsCount} Doctors</span>
                     </div>
-                    <div className="stat-item">
-                      <FaBed />
-                      <span>{department.bedsCount || '50+'} Beds</span>
-                    </div>
-                    <div className="stat-item">
-                      <FaCalendarCheck />
-                      <span>{department.appointmentsCount || '100+'} Monthly Patients</span>
-                    </div>
+                    {department.bedsCount > 0 && (
+                      <div className="stat-item">
+                        <FaBed />
+                        <span>{department.bedsCount}+ Beds</span>
+                      </div>
+                    )}
+                    {department.monthlyPatients > 0 && (
+                      <div className="stat-item">
+                        <FaCalendarCheck />
+                        <span>{department.monthlyPatients}+ Monthly Patients</span>
+                      </div>
+                    )}
                   </div>
                   <button className="learn-more-btn">Learn More</button>
                 </div>
@@ -115,7 +119,7 @@ function Departments() {
         ) : (
           <div className="selected-department">
             <button 
-              className="back-button mb-4"
+              className="back-button mb-4 floating-back-btn"
               onClick={() => setSelectedDepartment(null)}
             >
               <FaArrowLeft className="me-2" />

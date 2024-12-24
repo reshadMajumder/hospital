@@ -106,6 +106,14 @@ const DoctorProfile = ({ doctor, show, onHide }) => {
             </Col>
           </Row>
         )}
+        {doctor.bmdc_registration && (
+          <Row className="mt-3">
+            <Col md={12}>
+              <h5>BMDC Registration</h5>
+              <p>{doctor.bmdc_registration}</p>
+            </Col>
+          </Row>
+        )}
       </Modal.Body>
     </Modal>
   );
