@@ -174,7 +174,7 @@ section {
 }
 
 .hero-section h1 {
-  color: #E0FFFF ;
+  color: white ;
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 800;
   margin-bottom: 20px;
@@ -191,7 +191,7 @@ section {
 .hero-section .lead {
   font-size: clamp(16px, 2vw, 20px);
   margin-bottom: 30px;
-  color: #E0FFFF  ;
+  color: white  ;
   font-weight: 600;
   /* text-shadow: 
     1px 1px 0 #fff,
