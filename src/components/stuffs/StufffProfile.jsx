@@ -1,5 +1,5 @@
 import { Container, Row, Col, Card, Button, Table } from 'react-bootstrap';
-import { FaCalendarAlt, FaPhone, FaEnvelope, FaClock, FaStar } from 'react-icons/fa';
+import { FaCalendarAlt, FaPhone, FaClock } from 'react-icons/fa';
 
 function StufProfile({ doctor }) {
   return (

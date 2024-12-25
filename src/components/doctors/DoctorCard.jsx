@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Card, Button } from 'react-bootstrap';
+import {  Button } from 'react-bootstrap';
 import '../../styles/DoctorCard.css';
 import API_URL from '../../data/ApiData';
 

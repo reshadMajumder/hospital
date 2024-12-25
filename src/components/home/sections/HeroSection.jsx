@@ -31,11 +31,11 @@ function HeroSection() {
     backgroundImage: `url(${API_URL}${hospitalInfo.home_Banner})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
   };
 
   return (
-    <section className="hero-section" style={heroStyle}>
+    <section className="hero-section" rel="preload" style={heroStyle}>
       <Container>
         <Row className="justify-content-center">
           <Col lg={10} className="text-center">
