@@ -63,8 +63,9 @@ function SearchBar({ initialValue = '', onSearchChange }) {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      navigate(`/doctors?search=${searchTerm}`);
+      navigate(`/doctors?search=${encodeURIComponent(searchTerm.trim())}`);
       setShowSuggestions(false);
+      setSearchTerm(''); // Clear the search after redirecting
     }
   };
 

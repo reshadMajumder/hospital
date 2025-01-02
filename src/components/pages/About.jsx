@@ -7,6 +7,7 @@ import '../../styles/About.css';
 import StatsSection from '../home/sections/StatsSection';
 
 function About() {
+  
   const [currentImage, setCurrentImage] = useState(0);
   const [aboutData, setAboutData] = useState(null);
   const [loading, setLoading] = useState(true);

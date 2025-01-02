@@ -47,7 +47,7 @@ function Footer() {
             <h5 className="mb-4">{footerData?.title || 'Medical Center'}</h5>
             <p className="mb-4">{footerData?.description || 'Providing quality healthcare services.'}</p>
             <div className="social-links">
-              <a href="#" className="me-3"><FaFacebookF /></a>
+              <a href="https://www.facebook.com/p/%E0%A6%AA%E0%A6%AA%E0%A7%81%E0%A6%B2%E0%A6%BE%E0%A6%B0-%E0%A6%9C%E0%A7%87%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B2-%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2-%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%83-%E0%A6%B2%E0%A6%BF%E0%A6%83-100086795420748/?_rdr" className="me-3"><FaFacebookF /></a>
               <a href="#" className="me-3"><FaTwitter /></a>
               <a href="#" className="me-3"><FaLinkedinIn /></a>
               <a href="#" className="me-3"><FaInstagram /></a>

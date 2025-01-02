@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { motion } from 'framer-motion';
+import { useSearchParams } from 'react-router-dom';
 import DoctorCard from '../doctors/DoctorCard';
 import DoctorProfile from '../doctors/DoctorProfile';
 import axios from 'axios';
@@ -15,6 +16,14 @@ const Doctors = () => {
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const search = searchParams.get('search');
+    if (search) {
+      setSearchTerm(search);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const fetchDoctors = async () => {
@@ -34,8 +43,11 @@ const Doctors = () => {
   const departments = ['All', ...new Set(doctors.map(doctor => doctor.department.name))];
 
   const filteredDoctors = doctors.filter(doctor => {
-    const matchesSearch = doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doctor.specialty.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const searchTermLower = searchTerm.toLowerCase();
+    const matchesSearch = 
+      doctor.name.toLowerCase().includes(searchTermLower) ||
+      doctor.specialty.name.toLowerCase().includes(searchTermLower) ||
+      doctor.department.name.toLowerCase().includes(searchTermLower);
     const matchesDepartment = selectedDepartment === '' || 
                              selectedDepartment === 'All' || 
                              doctor.department.name === selectedDepartment;
