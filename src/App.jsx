@@ -19,31 +19,40 @@ import './styles/Reviews.css';
 import Spinner3D from './components/common/Spinner3D';
 import DoctorProfilePage from './components/doctors/DoctorProfilePage';
 
+
 function App() {
   return (
     <Router>
       <div className="app-wrapper">
-        <Navigation />
-        <main className="main-content">
-          
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/doctors" element={<Doctors />} />
-            <Route path="/departments" element={<Departments />} />
-            <Route path="/staff" element={<Staff />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/Doctor-profile" element={<DoctorProfile />} />
-            <Route path="/spinner" element={<Spinner3D />} />
-            <Route path="/doctors/:id" element={<DoctorProfilePage />} />
-          </Routes>
-        </main>
-        <BottomNavigation />
-        <Footer />
+        <Routes>
+
+
+          {/* Public Routes */}
+          <Route path="*" element={
+            <>
+              <Navigation />
+              <main className="main-content">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/doctors" element={<Doctors />} />
+                  <Route path="/departments" element={<Departments />} />
+                  <Route path="/staff" element={<Staff />} />
+                  <Route path="/reviews" element={<Reviews />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/Doctor-profile" element={<DoctorProfile />} />
+                  <Route path="/spinner" element={<Spinner3D />} />
+                  <Route path="/doctors/:id" element={<DoctorProfilePage />} />
+                </Routes>
+              </main>
+              <BottomNavigation />
+              <Footer />
+            </>
+          } />
+        </Routes>
       </div>
-    </Router> 
+    </Router>
   );
 }
 

@@ -1,7 +1,7 @@
 // for production
 
-// const API_URL = 'https://api.tpopulargeneralhospitalpvt.com';   
-const API_URL = 'https://exoverse.pythonanywhere.com';  
+const API_URL = 'https://api.tpopulargeneralhospitalpvt.com';   
+// const API_URL = 'https://exoverse.pythonanywhere.com';  
 
 
 
