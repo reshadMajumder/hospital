@@ -1,34 +1,9 @@
-import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import SearchBar from '../../common/SearchBar/SearchBar';
-import Spinner3D from '../../common/Spinner3D';
-import axios from 'axios';
-import API_URL from '../../../data/ApiData';
 
 function HeroSection() {
-  const [hospitalInfo, setHospitalInfo] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchHospitalInfo = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/api/hospital-info/`);
-        setHospitalInfo(response.data);
-      } catch (error) {
-        console.error('Error fetching hospital info:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHospitalInfo();
-  }, []);
-
-  if (loading) return <Spinner3D />;
-  if (!hospitalInfo) return null;
-
   const heroStyle = {
-    backgroundImage: `url(${API_URL}${hospitalInfo.home_Banner})`,
+    backgroundImage: `url('images/hero_bg.jpg')`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
@@ -40,10 +15,10 @@ function HeroSection() {
         <Row className="justify-content-center">
           <Col lg={10} className="text-center">
             <h1 className="animate__animated animate__fadeInDown">
-              {hospitalInfo.home_header}
+              Your Health - Is Our Priority
             </h1>
             <p className="lead animate__animated animate__fadeInUp">
-              {hospitalInfo.home_header_two}
+              Find the right doctor for your needs
             </p>
             <div className="animate__animated animate__fadeInUp">
               <div className="search-container">

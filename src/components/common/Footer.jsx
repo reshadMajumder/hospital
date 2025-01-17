@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
+import { Container, Row, Col} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
 import axios from 'axios';
@@ -10,7 +10,7 @@ function Footer() {
   const [hospitalInfo, setHospitalInfo] = useState(null);
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,8 +36,8 @@ function Footer() {
 
   if (loading) return null;
 
-  const handleShow = () => setShowModal(true);
-  const handleClose = () => setShowModal(false);
+  // const handleShow = () => setShowModal(true);
+  // const handleClose = () => setShowModal(false);
 
   return (
     <footer className="bg-dark text-light py-5">

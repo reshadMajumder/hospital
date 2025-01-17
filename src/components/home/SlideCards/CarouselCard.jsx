@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import API_URL from '../../../data/ApiData';
 
 function CarouselCard({ title, icon, items }) {
   return (
@@ -13,7 +12,7 @@ function CarouselCard({ title, icon, items }) {
           {icon && (
             <div className="department-icon-wrapper">
               <img 
-                src={`${API_URL}${icon}`} 
+                src={icon} 
                 alt={title} 
                 className="department-card-icon"
                 style={{ width: '35px', height: '35px' }}

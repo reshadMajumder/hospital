@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt,FaClock } from 'react-icons/fa';
+
 import axios from 'axios';
 import API_URL from '../../../data/ApiData';
 
@@ -34,19 +36,20 @@ function LocationSection() {
               <ul className="list-unstyled contact-list">
                 <li className="mb-3 d-flex align-items-center">
                   <i className="fas fa-map-marker-alt me-3 text-primary"></i>
-                  <span>Address: {contactInfo.address}</span>
+                  <span><FaMapMarkerAlt className="me-2" />
+                  {contactInfo.address}</span>
                 </li>
                 <li className="mb-3 d-flex align-items-center">
-                  <i className="fas fa-phone-alt me-3 text-primary"></i>
-                  <span>Hotline: {contactInfo.phone}</span>
+                  <i className="fas fa-phone-alt me-3 text-primary "></i>
+                  <span><FaPhone className="me-2" /> {contactInfo.phone}</span>
                 </li>
-                <li className="mb-3 d-flex align-items-center">
+                <li className="mb-3 d-flex align-items-center" style={{ fontSize: '0.8rem', cursor: 'pointer' }} onClick={() => window.location.href = `mailto:${contactInfo.email}`}>
                   <i className="fas fa-envelope me-3 text-primary"></i>
-                  <span>Email: {contactInfo.email}</span>
+                  <span><FaEnvelope className="me-2" /> <a href={`mailto:${contactInfo.email}`} style={{ color: '#007bff', textDecoration: 'underline' }}>{contactInfo.email}</a></span>
                 </li>
                 <li className="d-flex align-items-center">
                   <i className="fas fa-clock me-3 text-primary"></i>
-                  <span>Time:Mon-Fri: 8:00 AM - 8:00 PM</span>
+                  <span><FaClock className="me-2" />Mon-Fri: 8:00 AM - 8:00 PM</span>
                 </li>
               </ul>
             </div>
