@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { motion } from 'framer-motion';
-import DoctorCard from '../doctors/DoctorCard';
-import DoctorProfile from '../doctors/DoctorProfile';
+import StaffCard from '../stuffs/StaffCard';
+import StaffProfile from '../stuffs/StaffProfile';
 import axios from 'axios';
 import API_URL from '../../data/ApiData';
 import Spinner3D from '../common/Spinner3D'; // Import the spinner component
+
 
 const Staff = () => {
   const [staff, setStaff] = useState([]);
@@ -85,7 +86,7 @@ const Staff = () => {
         <Row>
           {filteredStaff.map((member) => (
             <Col key={member.id} lg={4} md={6} className="mb-4">
-              <DoctorCard 
+              <StaffCard 
                 doctor={member} 
                 onViewProfile={handleViewProfile}
               />
@@ -93,7 +94,7 @@ const Staff = () => {
           ))}
         </Row>
 
-        <DoctorProfile
+        <StaffProfile
           doctor={selectedStaff}
           show={showProfile}
           onHide={() => setShowProfile(false)}
