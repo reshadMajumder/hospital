@@ -85,12 +85,25 @@ function Contact() {
         <Col md={4} className="text-center mb-4 mb-md-0">
           <FaPhone className="text-primary mb-3" size={30} />
           <h4>Phone</h4>
-          <p>{hospitalInfo?.phone || 'Not available'}</p>
+          <p className="clickable" onClick={() => window.location.href = `tel:${hospitalInfo?.phone}`}>
+            {hospitalInfo?.phone || 'Not available'}
+          </p>
+          <p className="clickable" onClick={() => window.location.href = `tel:${hospitalInfo?.phone_Two}`}>
+            {hospitalInfo?.phone_Two || 'Not available'}
+          </p>
         </Col>
         <Col md={4} className="text-center mb-4 mb-md-0">
           <FaEnvelope className="text-primary mb-3" size={30} />
           <h4>Email</h4>
-          <p>{hospitalInfo?.email || 'Not available'}</p>
+          <p>
+            {hospitalInfo?.email ? (
+              <a href={`mailto:${hospitalInfo.email}`} className="text-decoration-none">
+                {hospitalInfo.email}
+              </a>
+            ) : (
+              'Not available'
+            )}
+          </p>
         </Col>
         <Col md={4} className="text-center">
           <FaMapMarkerAlt className="text-primary mb-3" size={30} />

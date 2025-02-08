@@ -79,11 +79,15 @@ function Footer() {
               </li>
               <li className="mb-3">
                 <FaPhone className="me-2" />
-                {hospitalInfo?.phone}
+                <span className="clickable" onClick={() => window.location.href = `tel:${hospitalInfo?.phone}`}>
+                  {hospitalInfo?.phone}
+                </span>
               </li>
               <li className="mb-3">
                 <FaEnvelope className="me-2" />
-                {hospitalInfo?.email}
+                <a href={`mailto:${hospitalInfo?.email}`} className="text-light text-decoration-none">
+                  {hospitalInfo?.email}
+                </a>
               </li>
             </ul>
           </Col>

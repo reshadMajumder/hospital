@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal } from 'react-bootstrap';
+import { FaPhone } from 'react-icons/fa';
 import axios from 'axios';
 import API_URL from '../../../data/ApiData';
 import Spinner3D from '../../common/Spinner3D';
@@ -32,11 +32,16 @@ function StatusCards() {
       <div className="status-cards-wrapper">
         <div className="status-cards-container">
           <div className="status-card">
-            <div className="card-inner" onClick={() => window.location.href = `tel:${hospitalInfo?.phone}`}>
+            <div className="card-inner">
               <h4 className="text-primary mb-2">Book Appointment</h4>
               <p className="mb-0">Get instant appointment </p>
               <p className="text-primary mt-2 fw-bold">
-                Hotline: {hospitalInfo?.phone || 'Loading...'}
+                <FaPhone /> 
+                <span onClick={() => window.location.href = `tel:${hospitalInfo?.phone}`} className="clickable"> {hospitalInfo?.phone || 'Loading...'}</span>
+              </p>
+              <p className="text-primary mt-2 fw-bold">
+                <FaPhone /> 
+                <span onClick={() => window.location.href = `tel:${hospitalInfo?.phone_Two}`} className="clickable"> {hospitalInfo?.phone_Two || 'Loading...'}</span>
               </p>
             </div>
           </div>
