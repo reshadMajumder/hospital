@@ -14,6 +14,7 @@ const StaffCard = ({ doctor, onViewProfile }) => {
     >
       <div className="doctor-image-container">
         <motion.img
+          loading="lazy"
           src={`${API_URL}${doctor.image}`}
           alt={doctor.name}
           className="profile-image"
